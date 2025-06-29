@@ -1,8 +1,7 @@
-
-   <div class="container">
+<div class="container">
     <h2>Login or Sign Up</h2>
 
-    <!-- Display error message if any -->
+    <!-- Error message -->
     <div *ngIf="errorMessage" class="error-message" style="color: red; margin-bottom: 15px;">
         {{ errorMessage }}
     </div>
@@ -21,7 +20,7 @@
 
     <div class="or-separator">OR</div>
 
-    <!-- The Google Sign-In button -->
+    <!-- Google Sign-In button -->
     <button class="google-btn" (click)="googleSignIn()">
         <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google logo">
         Continue with Google

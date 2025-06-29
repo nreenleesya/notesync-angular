@@ -1,4 +1,4 @@
-// src/app/services/chat.service.ts
+// src/app/services/page.service.ts
 
 import { inject, Injectable } from '@angular/core';
 import {
