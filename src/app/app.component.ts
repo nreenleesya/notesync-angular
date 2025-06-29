@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
-import { RouterOutlet} from '@angular/router';
+import { HeaderComponent } from './components/header/header.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [RouterOutlet,],
-  templateUrl: './app.component.html'
-
+  imports: [HeaderComponent, RouterModule],
 })
-export class AppComponent { title = 'notesync-angular';}
+export class AppComponent {
+  title = 'Notesync';
+}

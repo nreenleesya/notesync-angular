@@ -1,0 +1,106 @@
+body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        input[type="email"],
+        input[type="password"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .or-separator {
+            margin: 20px 0;
+            position: relative;
+            text-align: center;
+            color: #888;
+        }
+        .or-separator::before,
+        .or-separator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #ddd;
+        }
+        .or-separator::before {
+            left: 0;
+        }
+        .or-separator::after {
+            right: 0;
+        }
+        .google-btn {
+            background-color: #db4437; /* Google red */
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        .google-btn img {
+            margin-right: 10px;
+            height: 20px;
+            width: 20px;
+        }
+        .google-btn:hover {
+            background-color: #c0392b;
+        }
+        .signup-link {
+            margin-top: 20px;
+            color: #555;
+        }
+        .signup-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
