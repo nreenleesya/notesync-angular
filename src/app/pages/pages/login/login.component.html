@@ -1,30 +1,33 @@
 <div class="container">
-    <h2>Login or Sign Up</h2>
-
-    <!-- Error message -->
-    <div *ngIf="errorMessage" class="error-message" style="color: red; margin-bottom: 15px;">
-        {{ errorMessage }}
+    <div class="login-card">
+        <div class="left-panel">
+            <div class="logo">
+                <span class="material-symbols-outlined">
+                    edit_note
+                </span>
+            </div>
+            <h1>Notesyncs</h1>
+            <p>Share your notes with the world</p>
+        </div>
+        <div class="right-panel">
+            <form (ngSubmit)="login()">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="you@example.com" [(ngModel)]="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" [(ngModel)]="password" name="password" required>
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                </div>
+                <button type="submit" class="btn-sign-in">Sign in</button>
+            </form>
+            <div class="divider">Or continue with</div>
+            <button class="btn-google-sign-in" (click)="googleSignIn()" type="button">
+                <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google logo">
+                Sign in with Google
+            </button>
+            <p class="signup-text">Don't have an account? <a href="#" class="sign-up-link">Sign up</a></p>
+        </div>
     </div>
-
-    <form (submit)="login()">
-        <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" [(ngModel)]="email" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" [(ngModel)]="password" required>
-        </div>
-        <button type="submit">Login</button>
-    </form>
-
-    <div class="or-separator">OR</div>
-
-    <!-- Google Sign-In button -->
-    <button class="google-btn" (click)="googleSignIn()">
-        <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google logo">
-        Continue with Google
-    </button>
-
-    <p class="signup-link">Don't have an account? <a href="#">Sign Up</a></p>
 </div>
