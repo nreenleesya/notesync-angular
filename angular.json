@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "friendlychat": {
+    "notesync": {
       "projectType": "application",
       "schematics": {},
       "root": "",
