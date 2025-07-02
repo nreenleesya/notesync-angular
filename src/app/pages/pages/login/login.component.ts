@@ -25,7 +25,7 @@ export class LoginPageComponent {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(this.auth, provider);
       console.log('Google Sign-In successful!');
-      this.router.navigate(['/chat']);
+      this.router.navigate(['dashboard']);
     } catch (error: any) {
       console.error('Error during Google sign-in:', error);
       if (error.code === 'auth/popup-closed-by-user') {
@@ -45,7 +45,7 @@ export class LoginPageComponent {
     try {
       await signInWithEmailAndPassword(this.auth, this.email, this.password);
       console.log('Email/Password Sign-In successful!');
-      this.router.navigate(['/chat']);
+      this.router.navigate(['dashboard']);
     } catch (error: any) {
       console.error('Email/Password Sign-In failed:', error);
       switch (error.code) {

@@ -3,8 +3,9 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background-color: #37BD51; /* A shade of green similar to the background */
-    display: flex;
+    background: linear-gradient(to right, #e0e0ff, #ffe0e0); /* Light purple to light pink gradient */
+    color: #333;
+    overflow: hidden;display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -29,7 +30,7 @@ body {
 }
 
 .left-panel {
-    background-color: #37BD51; /* Darker green for the left panel */
+    background-color:#5a12a0; /* Darker purple for the left panel */
     color: #fff;
     padding: 40px;
     display: flex;
@@ -97,7 +98,7 @@ body {
     top: 0; /* Align with the top of the input for better visual */
     margin-top: 35px; /* Adjust to position correctly relative to input */
     font-size: 0.9em;
-    color: #37BD51;
+    color: #8A2BE2;
     text-decoration: none;
     font-weight: 600;
 }
@@ -105,7 +106,7 @@ body {
 .btn-sign-in {
     width: 100%;
     padding: 15px;
-    background-color: #37BD51;
+    background-color:  #8A2BE2; /* Blue Violet */
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -117,7 +118,7 @@ body {
 }
 
 .btn-sign-in:hover {
-    background-color: #2da445; /* Slightly darker green on hover */
+    background-color: #6a0dad; /* Darker shade on hover */
 }
 
 .divider {
@@ -181,7 +182,7 @@ body {
 }
 
 .sign-up-link {
-    color: #37BD51;
+    color: #8A2BE2;
     text-decoration: none;
     font-weight: 600;
 }
