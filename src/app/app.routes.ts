@@ -5,7 +5,7 @@ import {
   redirectUnauthorizedTo,
 } from '@angular/fire/auth-guard';
 import { LoginPageComponent } from './pages/pages/login/login.component';
-import { LandingPageComponent } from './pages/pages/landing-page/landing.component';
+import { LandingPageComponent } from './pages/pages/landing/landing.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['chat']);
