@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./landing-page.css'] // Points to component-specific styles (if any)
 })
 export class LandingPageComponent implements OnInit {
+  router: any;
 
   constructor() { }
 
@@ -13,6 +14,13 @@ export class LandingPageComponent implements OnInit {
     // Initialization logic for the component goes here.
     // For a static landing page, you might not need much here.
     console.log('LandingPageComponent initialized!');
+  }
+
+  navigateToLogin(): void {
+    console.log('Navigating to login page...');
+    // Use the router.navigate method to go to the '/login' route
+    // Make sure you have a route configured for '/login' in your app-routing.module.ts or app.routes.ts
+    this.router.navigate(['/login/login.component.html']);
   }
 
   // You can add methods here for any interactive elements on your landing page
