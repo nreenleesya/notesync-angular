@@ -11,35 +11,11 @@
 </head>
 
 <header class="navbar">
-    <div class="logo">
-        <img src="assets/logo_notesync.jpg" alt="NOTESYNCS Logo">
         <h1>NOTESYNCS</h1>
-    </div>
     <nav>
         <ul>
             <li><a onclick="window.location.href='landing'">Home</a></li>
             <li><a onclick="window.location.href='about'">About us</a></li>
-            @if (user$ | async; as user){
-                <div class="flex flex-wrap items-center content-center auth">
-                <div class="logo">
-                    <img class="w-10 h-10 rounded-full" [src]="user?.photoURL"
-                    [alt]="user?.displayName" />
-                    <!-- uncomment to show user's name
-                    <span class="text-white text-xl whitespace-nowrap font-light px-4 lg:px-5 py-2 lg:py-2.5">
-                        {{user?.displayName}}
-                    </span>
-                -->
-                    <li>
-                        <a class="bg-white hover:bg-navy-20 rounded-md mt-4 py-3 px-4 block whitespace-no-wrap text-navy-500 font-semibold"
-                        href="/" (click)="this.chatService.logout()">
-                        Sign out
-                    </a>
-                </li>
-            </div>
-        </div>
-            }@else if (user$ | async) {
-                <li><button class="sign-up-btn" onclick="window.location.href='login'">Login/Register</button></li>
-            }
         </ul>
 </nav>
 </header>
