@@ -25,7 +25,7 @@ export class LoginPageComponent {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(this.auth, provider);
       console.log('Google Sign-In successful!');
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['dasboard']);
     } catch (error: any) {
       console.error('Error during Google sign-in:', error);
       if (error.code === 'auth/popup-closed-by-user') {

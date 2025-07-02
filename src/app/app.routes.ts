@@ -7,6 +7,7 @@ import {
 import { LoginPageComponent } from './pages/pages/login/login.component';
 import { LandingPageComponent } from './pages/pages/landing/landing.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SignupPageComponent } from './pages/pages/signup/signup.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['chat']);
@@ -25,5 +26,9 @@ export const routes: Routes = [
     component: LoginPageComponent,
     canActivate: [AuthGuard],
     data: { authGuardPipe: redirectLoggedInToHome },
+  },
+   {
+    path: 'signup', // This path represents the root URL (e.g., http://localhost:4200/)
+    component: SignupPageComponent // When the path is empty, load the NOTESALEComponent
   },
 ];

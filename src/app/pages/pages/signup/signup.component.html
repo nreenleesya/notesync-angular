@@ -1,0 +1,13 @@
+<div class="signup-form">
+  <h2>Create an Account</h2>
+  <form (ngSubmit)="signup()">
+    <input [(ngModel)]="email" name="email" placeholder="Email" required />
+    <input [(ngModel)]="username " name="username" type="username" placeholder="Username" required />
+    <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required />
+    <input [(ngModel)]="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm Password" required />
+
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+</div>
