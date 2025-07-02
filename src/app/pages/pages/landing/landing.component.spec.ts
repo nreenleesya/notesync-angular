@@ -13,4 +13,8 @@ export class LandingPageComponent {
   navigateToLogin() {
     this.router.navigate(['/login']); // Now 'this.router' is defined
   }
+
+  navigateToLanding() {
+    this.router.navigate(['/landing']); // Now 'this.router' is defined
+  }
 }

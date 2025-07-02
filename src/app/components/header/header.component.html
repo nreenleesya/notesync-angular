@@ -17,8 +17,8 @@
     </div>
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About us</a></li>
+            <li><a onclick="window.location.href='landing'">Home</a></li>
+            <li><a onclick="window.location.href='about'">About us</a></li>
             @if (user$ | async; as user){
                 <div class="flex flex-wrap items-center content-center auth">
                 <div class="logo">
@@ -28,7 +28,7 @@
                     <span class="text-white text-xl whitespace-nowrap font-light px-4 lg:px-5 py-2 lg:py-2.5">
                         {{user?.displayName}}
                     </span>
-                    -->
+                -->
                     <li>
                         <a class="bg-white hover:bg-navy-20 rounded-md mt-4 py-3 px-4 block whitespace-no-wrap text-navy-500 font-semibold"
                         href="/" (click)="this.chatService.logout()">
