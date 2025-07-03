@@ -3,7 +3,7 @@
 .hero-section {
     position: relative;
     height: 450px; /* Adjust height as needed */
-    background-image: url('https://placehold.co/1920x450/B0E0E6/FFFFFF?text=Travel+Background'); /* Placeholder background image */
+    background-image:  rgba(254, 254, 254, 0.4); /* Placeholder background image */
     background-size: cover;
     background-position: center;
     display: flex;
