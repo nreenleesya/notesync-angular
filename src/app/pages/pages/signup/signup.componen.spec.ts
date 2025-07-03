@@ -13,8 +13,4 @@ export class SignupComponent {
   navigateToLogin() {
     this.router.navigate(['/login']); // Now 'this.router' is defined
   }
-
-  navigateToSignup() {
-    this.router.navigate(['/signup']); // Now 'this.router' is defined
-  }
 }

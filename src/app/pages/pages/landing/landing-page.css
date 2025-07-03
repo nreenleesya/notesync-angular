@@ -2,160 +2,429 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(to right, #e0e0ff, #ffe0e0); 
-    /*background-image: url('assets/background-landing.jpg'); /* Replace with your image URL */
-    background-size: cover; /* Ensures the image covers the entire background */
-    background-position: center; /* Centers the image */
-    background-repeat: no-repeat; /* Prevents the image from repeating */
-    background-attachment: fixed; /* Keeps the background fixed when scrolling */
     color: #333;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    position: relative; /* Needed for the overlay pseudo-element */
+    background-color: #f5f5f5; /* Light grey background */
 }
 
-/* Overlay for the background image to maintain tint and readability */
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+section h2 {
+    font-size: 2em;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* --- Best Deals Section Styles --- */
+.best-deals-section {
+    background-color: #f5f5f5;
+    padding-top: 20px;
+}
+
+.best-deals-section h2 {
+    text-align: left;
+    margin-left: 20px;
+    margin-bottom: 25px;
+    font-size: 1.8em;
+    color: #333;
+}
+
+.deals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 20px;
+}
+
+.deal-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.deal-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.deal-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.deal-route {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+    flex-basis: 70%; /* Take up more space */
+    margin-bottom: 5px;
+}
+
+.deal-route .arrow {
+    color: #007bff; /* Blue arrow */
+    font-weight: 700;
+    margin: 0 5px;
+}
+
+.deal-price-label {
+    font-size: 0.85em;
+    color: #777;
+    text-align: right;
+    flex-basis: 28%; /* Align to right */
+}
+
+.deal-price {
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #ef5350; /* Red price */
+    text-align: right;
+    flex-basis: 28%;
+    margin-top: -5px; /* Pull up closer to label */
+}
+
+.deal-price-per-pax {
+    font-size: 0.8em;
+    color: #777;
+    text-align: right;
+    flex-basis: 28%;
+    margin-top: -5px;
+}
+
+.deal-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.deal-details p {
+    font-size: 0.9em;
+    color: #555;
+    margin: 0;
+}
+
+.airline-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.airline-logo {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    object-fit: contain;
+}
+
+.select-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+    align-self: flex-end; /* Align to the right bottom */
+    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+}
+
+.select-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+
+.notes-grid, .promo-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.notes-grid {
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+}
+
+.promo-grid {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.notes-item, .promo-item {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.notes-item:hover, .promo-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.notes-item img, .promo-item img {
     width: 100%;
-    height: 100%;
-    background: linear-gradient(to right, rgba(224, 224, 255, 0.7), rgba(255, 224, 224, 0.7)); /* Semi-transparent overlay */
-    z-index: -1; /* Ensures the overlay is behind content but above the background image */
+    height: 180px; /* Fixed height for images */
+    object-fit: cover;
+    display: block;
 }
 
-/* Hero Section Styles */
-.hero-section {
-    flex-grow: 1;
+.notes-item h3, .promo-item h3 {
+    font-size: 1.3em;
+    margin: 15px 15px 5px 15px;
+    color: #333;
+}
+
+.destination-item p, .promo-item p {
+    font-size: 0.95em;
+    color: #666;
+    margin: 0 15px 15px 15px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust minmax for card size */
+    gap: 20px;
+}
+
+.info-card {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align content to the left */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon-wrapper {
+    background-color: #ffebee; /* Light red background for icon */
+    border-radius: 50%; /* Circular background */
+    width: 40px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 5%;
-    gap: 50px;
-    position: relative;
-    overflow: hidden; /* Ensures content stays within bounds */
-    z-index: 1; /* Ensure content is above the overlay */
+    margin-bottom: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.hero-content {
-    max-width: 500px;
-    text-align: left;
-    z-index: 1; /* Ensure content is above any background elements */
+.card-icon-wrapper i.material-icons {
+    font-size: 1.8em; /* Large icon size */
+    color: #ef5350; /* Red icon color */
 }
 
-.hero-content h2 {
-    font-family: 'Playfair Display', serif; /* A more decorative font for the heading */
-    font-size: 3.5em;
-    line-height: 1.2;
-    color: #333;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+.card-title {
+    font-size: 1em;
+    color: #777;
+    margin-bottom: 10px;
+    font-weight: 500;
 }
 
-.hero-content p {
-    font-size: 1.5em;
-    color: #555;
-    margin-bottom: 30px;
-    font-style: italic;
+.card-link {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #007bff; /* Blue for links */
+    text-decoration: none;
+    margin-bottom: 5px; /* Space between link and value if present */
+    transition: color 0.3s ease;
 }
 
-.get-started-btn {
-    background-color: #a072d8; /* A softer purple */
+.card-link:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+.card-value {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333; /* Darker text for values */
+}
+
+/* Footer Styles */
+.main-footer {
+    background-color: #333;
     color: white;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 25px;
-    cursor: pointer;
+    padding: 40px 0;
+    margin-top: 50px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 180px;
+}
+
+.footer-section h3 {
     font-size: 1.2em;
-    font-weight: 700;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 15px;
+    color: #007bff;
 }
 
-.get-started-btn:hover {
-    background-color: #8A2BE2; /* Blue Violet on hover */
-    transform: translateY(-3px);
+.footer-section p {
+    font-size: 0.9em;
+    line-height: 1.5;
+    color: #bbb;
 }
 
-.hero-image img {
-    max-width: 450px;
-    height: auto;
-    border-radius: 15px; /* Rounded corners for the image */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #bbb;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: #007bff;
 }
 
 /* Responsive Design */
 @media (max-width: 992px) {
-    .hero-section {
+    .header-content, .hero-content, section, .footer-content {
+        padding: 0 15px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2em;
+    }
+
+    .search-card {
+        padding: 15px;
+    }
+
+    .flight-search-form .form-row {
         flex-direction: column;
-        text-align: center;
-        gap: 30px;
-    }
-
-    .hero-content {
-        max-width: 80%;
-    }
-
-    .hero-content h2 {
-        font-size: 3em;
-    }
-
-    .navbar {
-        flex-direction: column;
-        padding: 10px 3%;
-        border-radius: 0 0 10px 10px;
-    }
-
-    .navbar nav ul {
-        margin-top: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
         gap: 15px;
+    }
+
+    .tab-button {
+        padding: 8px 15px;
+        font-size: 1em;
+    }
+
+    .search-button {
+        font-size: 1.1em;
+        padding: 10px 15px;
+    }
+
+    .destination-grid, .promo-grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 }
 
 @media (max-width: 768px) {
-    .hero-content h2 {
-        font-size: 2.5em;
+    .main-header {
+        padding: 10px 0;
     }
 
-    .hero-content p {
-        font-size: 1.2em;
+    .header-content {
+        flex-direction: column;
+        gap: 10px;
     }
 
-    .get-started-btn {
-        padding: 12px 25px;
-        font-size: 1.1em;
+    .header-nav ul {
+        gap: 15px;
     }
 
-    .navbar nav ul li a, .sign-up-btn {
-        font-size: 1em;
-        padding: 8px 15px;
+    .hero-section {
+        height: auto;
+        padding: 40px 0;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    .search-card {
+        margin-top: 20px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .footer-section {
+        min-width: unset;
+        width: 100%;
     }
 }
 
 @media (max-width: 480px) {
-    .logo h1 {
-        font-size: 1.5em;
+    .logo a {
+        font-size: 1.2em;
     }
 
-    .hero-content h2 {
-        font-size: 2em;
+    .header-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
-    .hero-content p {
+    .tab-button {
+        font-size: 0.9em;
+        padding: 6px 10px;
+    }
+
+    .flight-search-form input {
+        font-size: 0.9em;
+    }
+
+    .search-button {
         font-size: 1em;
+        padding: 8px 15px;
     }
 
-    .get-started-btn {
-        padding: 10px 20px;
-        font-size: 1em;
+    section h2 {
+        font-size: 1.6em;
     }
 
-    .navbar nav ul {
-        gap: 10px;
+    .destination-item img, .promo-item img {
+        height: 150px;
     }
 }

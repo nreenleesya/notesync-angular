@@ -1,15 +1,11 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { ChatService } from '../../services/page.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   standalone: true,
-  imports: [AsyncPipe],
 })
 export class HeaderComponent {
-  chatService: ChatService = inject(ChatService);
-  user$ = this.chatService.user$;
 }

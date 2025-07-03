@@ -3,20 +3,133 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOTESYNCS - Share Your Notes</title>
+    <title>NOTESYNCS - Sell Your Notes</title>
     <link rel="stylesheet" href="landing-page.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- for header button icon -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+
 <body>
-    <main class="hero-section">
-        <div class="hero-content">
-            <h2></h2>
-            <p>"Get The Notes, Get The Grades"</p>
-            <button class="get-started-btn" onclick="window.location.href='login'">Get Started</button> <!-- Added onclick for button -->
-        </div>
-        <div class="hero-image">
-            <!-- Placeholder for the image on the right -->
-            <img src="/assets/logo_notesync.jpg" alt="logo_notesync">
-        </div>
+    <main>
+        <!-- New Section: Best Notes Deals -->
+        <section class="best-deals-section">
+            <h2>Get the best Notes deals</h2>
+            <div class="deals-grid">
+                <div class="deal-card">
+                    <div class="deal-header">
+                        <p class="deal-route">Science Computer</p>
+                        <p class="deal-price-label">Start from</p>
+                        <p class="deal-price">RM 12.13</p>
+                        <p class="deal-price-per-pax">Price</p>
+                    </div>
+                    <div class="deal-details">
+                        <p>Science Computer, 24 Jul &bull; Notes</p>
+                        <div class="airline-info">
+                        </div>
+                    </div>
+                    <button class="select-button">Select</button>
+                </div>
+                <div class="deal-card">
+                    <div class="deal-header">
+                        <p class="deal-route">Philosophy</p>
+                        <p class="deal-price-label">Start from</p>
+                        <p class="deal-price">RM 10</p>
+                        <p class="deal-price-per-pax">Price</p>
+                    </div>
+                    <div class="deal-details">
+                        <p>Philosophy, 24 Jul &bull; Exercise</p>
+                        <div class="airline-info">
+                        </div>
+                    </div>
+                    <button class="select-button">Select</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Section: Notesyncs Information -->
+        <section class="notes-info-section">
+            <h2>Notesyncs Information</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="card-icon-wrapper">
+                        <i class="material-icons">local_offer</i>
+                    </div>
+                    <p class="card-title">Exclusive Notes Deals</p>
+                    <a href="#" class="card-link">Software Engineering,  MYR 10</a>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon-wrapper">
+                        <i class="material-icons">place</i>
+                    </div>
+                    <p class="card-title">Most Popular Notes</p>
+                    <a href="#" class="card-link">Medical</a>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon-wrapper">
+                        <i class="material-icons">flight_takeoff</i>
+                    </div>
+                    <p class="card-title">Most Popular Subject</p>
+                    <a href="#" class="card-link">Language</a>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon-wrapper">
+                        <i class="material-icons">calendar_today</i>
+                    </div>
+                    <p class="card-title">Cheapest Notes</p>
+                    <p class="card-value">Language</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon-wrapper">
+                        <i class="material-icons">location_on</i>
+                    </div>
+                    <p class="card-title">Total Notes Sold</p>
+                    <p class="card-value">109</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="promotions">
+            <h2>Latest Promotions</h2>
+            <div class="promo-grid">
+                <div class="promo-item">
+                    <img src="https://placehold.co/400x200/87CEEB/FFFFFF?text=Promo+1" alt="Promotion 1">
+                    <h3>Summer Sale!</h3>
+                    <p>Get up to 30% off on selected documents.</p>
+                </div>
+                <div class="promo-item">
+                    <img src="https://placehold.co/400x200/F08080/FFFFFF?text=Promo+2" alt="Promotion 2">
+                    <h3>New User Deals</h3>
+                    <p>Exclusive discounts on premium documents.</p>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AIRPAZ</h3>
+                <p>&copy; 2025 AirPaz. All rights reserved.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

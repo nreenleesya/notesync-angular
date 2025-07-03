@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router'; // Import Router
 
 import { HeaderComponent } from './header.component';
 

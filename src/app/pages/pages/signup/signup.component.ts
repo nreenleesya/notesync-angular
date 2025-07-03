@@ -43,6 +43,7 @@ export class SignupPageComponent {
     try {
       await createUserWithEmailAndPassword(this.auth, this.email, this.password);
       console.log('Sign-Up successful!');
+      const provider = new GoogleAuthProvider();
       this.router.navigate(['login']);
     } catch (error: any) {
       console.error('Sign-Up failed:', error);
