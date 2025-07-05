@@ -1,0 +1,140 @@
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    height: 450px; /* Adjust height as needed */
+    background-image:  rgba(254, 254, 254, 0.4); /* Placeholder background image */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for readability */
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    width: 100%;
+    padding: 0 20px;
+}
+
+.hero-content h1 {
+    font-size: 2.8em;
+    margin-bottom: 30px;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.search-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: left;
+}
+
+.search-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.tab-button {
+    background-color: transparent;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #777;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.tab-button.active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+}
+
+.tab-button:hover:not(.active) {
+    color: #0056b3;
+}
+
+.tab-button i.material-icons {
+    font-size: 1.3em;
+}
+
+.flight-search-form .form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 15px;
+}
+
+.flight-search-form .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.flight-search-form .form-group.full-width {
+    flex: none; /* Override flex: 1 */
+    width: 100%;
+}
+
+.flight-search-form label {
+    font-size: 0.9em;
+    color: #777;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.flight-search-form input[type="text"],
+.flight-search-form input[type="date"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.flight-search-form input[type="text"]:focus,
+.flight-search-form input[type="date"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.search-button {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+.search-button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}

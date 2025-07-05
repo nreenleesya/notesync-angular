@@ -69,9 +69,9 @@ type ChatMessage = {
  * - Navigating based on authentication state
  */
 @Injectable({
-  providedIn: 'root', // This makes ChatService a singleton instance available application-wide
+  providedIn: 'root', // This makes PageService a singleton instance available application-wide
 })
-export class ChatService {
+export class PageService {
   // Inject Firebase services using Angular's `inject` function for standalone components.
   // This automatically provides the service instances that were configured in `app.config.ts`.
   firestore: Firestore = inject(Firestore);
