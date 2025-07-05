@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; // Keep for other Angular routes if needed
 import { Auth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
 
 @Component({
@@ -12,12 +12,18 @@ import { Auth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider }
   imports: [CommonModule, FormsModule],
 })
 export class LoginPageComponent {
-  private router = inject(Router);
+  private router = inject(Router); // Still useful if you have other Angular routes
   private auth = inject(Auth);
 
   email = '';
   password = '';
   errorMessage: string | null = null;
+
+  // Define the base URL for your Next.js application
+  // IMPORTANT: Replace with your actual Next.js app URL
+  // During development: 'http://localhost:3000' or 'http://localhost:3001', etc.
+  // In production: 'https://your-nextjs-app.com'
+  private nextJsAppBaseUrl = 'http://localhost:3000'; // <--- !!! CHANGE THIS !!!
 
   async googleSignIn(): Promise<void> {
     this.errorMessage = null;
@@ -25,7 +31,11 @@ export class LoginPageComponent {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(this.auth, provider);
       console.log('Google Sign-In successful!');
-      this.router.navigate(['/chat']);
+
+      // Redirect to the Next.js application's dashboard or home page
+      // Firebase Auth handles the session state across domains (if configured correctly
+      // for the same Firebase project's auth domain).
+      window.location.href = `${this.nextJsAppBaseUrl}/dashboard`; // Redirect to Next.js dashboard
     } catch (error: any) {
       console.error('Error during Google sign-in:', error);
       if (error.code === 'auth/popup-closed-by-user') {
@@ -45,7 +55,10 @@ export class LoginPageComponent {
     try {
       await signInWithEmailAndPassword(this.auth, this.email, this.password);
       console.log('Email/Password Sign-In successful!');
-      this.router.navigate(['/chat']);
+
+      // Redirect to the Next.js application's dashboard or home page
+      // Firebase Auth will automatically handle the session in the Next.js app
+      window.location.href = `${this.nextJsAppBaseUrl}/dashboard`; // Redirect to Next.js dashboard
     } catch (error: any) {
       console.error('Email/Password Sign-In failed:', error);
       switch (error.code) {
