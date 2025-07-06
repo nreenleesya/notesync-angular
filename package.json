@@ -28,6 +28,7 @@
     "@angular/platform-browser": "^20.0.0",
     "@angular/router": "^20.0.0",
     "boxicons": "^2.1.4",
+    "mongodb": "^6.17.0",
     "react-icons": "^5.5.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
