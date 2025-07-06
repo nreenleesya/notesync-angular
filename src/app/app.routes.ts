@@ -15,6 +15,10 @@ const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
 
 export const routes: Routes = [
   {
+    path: '', // This path represents the root URL (e.g., http://localhost:4200/)
+    component: LandingPageComponent // When the path is empty, load the NOTESALEComponent
+  },
+  {
     path: '',
     redirectTo: 'landing',
     pathMatch: 'full'
