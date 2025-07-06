@@ -5,7 +5,7 @@ import { Observable, Subscription } from 'rxjs';
 
 // Corrected Firebase Auth imports:
 // User type comes from 'firebase/auth'
-import { User } from 'firebase/auth';
+import { getAuth, User } from 'firebase/auth';
 // Auth functions come from '@angular/fire/auth' when using AngularFire
 import {
   Auth, // The Auth service itself, which you get via inject(Auth) or getAuth()
@@ -14,6 +14,7 @@ import {
   signInWithCustomToken,
   signOut
 } from '@angular/fire/auth';
+import { initializeApp } from '@angular/fire/app';
 
 // Define the shape of the global variables provided by the environment
 declare const __firebase_config: string;
