@@ -1,15 +1,27 @@
+// src/app/pages/pages/login/login.component.ts
+
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'; // <-- THIS IS CRUCIAL FOR NGMODEL
 import { Router } from '@angular/router';
-import { Auth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
+
+// Corrected Firebase Auth imports:
+import {
+  Auth,
+  signInWithPopup,
+  signInWithEmailAndPassword,
+} from '@angular/fire/auth';
+
+import {
+  GoogleAuthProvider,
+} from 'firebase/auth'; // Source for GoogleAuthProvider
 
 @Component({
-  selector: 'app-login-page',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule], // <-- ENSURE FormsModule IS HERE
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginPageComponent {
   private router = inject(Router);
@@ -20,6 +32,7 @@ export class LoginPageComponent {
   errorMessage: string | null = null;
   isLoading = false;
 
+  //TODO: <--- !!! CHANGE THIS !!!
   private nextJsAppBaseUrl = 'http://localhost:3000'; // <--- !!! CHANGE THIS !!!
 
   async googleSignIn(): Promise<void> {
@@ -28,9 +41,6 @@ export class LoginPageComponent {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(this.auth, provider);
-      // For Google Sign-In, we'll generally navigate to userdashboard
-      // You might want to add a check here if specific Google accounts
-      // should go to 'dashboard' (e.g., based on email domain)
       this.router.navigate(['userdashboard']);
     } catch (error: any) {
       console.error('Error during Google sign-in:', error);
@@ -55,14 +65,11 @@ export class LoginPageComponent {
     try {
       await signInWithEmailAndPassword(this.auth, this.email, this.password);
 
-      // --- MODIFICATION START ---
-      // Check for the specific password
       if (this.password === 'notesyncs123') {
-        this.router.navigate(['dashboard']); // Navigate to dashboard
+        this.router.navigate(['dashboard']);
       } else {
-        this.router.navigate(['userdashboard']); // Navigate to userdashboard for all other passwords
+        this.router.navigate(['userdashboard']);
       }
-      // --- MODIFICATION END ---
 
     } catch (error: any) {
       console.error('Email/Password Sign-In failed:', error);

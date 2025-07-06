@@ -59,25 +59,13 @@
         <main class="main-content">
             <div class="search-bar-container">
                 <input type="text" placeholder="Search courses or notes here" class="search-input">
-                <i class="material-icons search-icon">search</i>
+                <i href ="db.users.find({})" class="material-icons search-icon">search</i>
+                <!--TODO: Add search functionality -->
             </div>
-
-           
 
             <div class="welcome-section">
                 <h3>Welcome to Notesyncs 👋</h3>
                 <p>This is your home, the starting point to discover the best study material.</p>
-                <div class="supercharge-card">
-                    <div class="supercharge-text">
-                        <h4>Supercharge your studies!</h4>
-                        <p>Unlock <strong>exclusive features</strong> and stay ahead.</p>
-                        <button class="create-account-btn">Create an account now</button>
-                    </div>
-                    <div class="supercharge-image">
-                        <!-- Placeholder image for illustration -->
-                        <img src="https://placehold.co/250x150/90EE90/FFFFFF?text=Illustration" alt="Study Illustration">
-                    </div>
-                </div>
             </div>
 
             <div class="continue-reading-section">
@@ -85,9 +73,11 @@
                 <div class="reading-grid">
                     <!-- Example document card -->
                     <div class="document-card">
-                        <img src="https://placehold.co/150x200/DDA0DD/FFFFFF?text=Document" alt="Document Preview">
-                        <p class="document-title">ASSIGNMENT 1</p>
-                        <p class="document-meta">Course Name &bull; University Name</p>
+                        <a href="https://www.vssut.ac.in/lecture_notes/lecture1428551142.pdf">
+                            <img src="https://www.vssut.ac.in/lecture_notes/lecture1428551142.pdf" alt="Document Preview">
+                        </a>
+                        <p class="document-title">Lecture Notes</p>
+                        <p class="document-meta">Course Name &bull; University Teknologi Mara</p>
                     </div>
                     <!-- Add more document cards as needed -->
                 </div>
