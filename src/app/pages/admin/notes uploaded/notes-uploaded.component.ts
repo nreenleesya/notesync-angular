@@ -8,9 +8,8 @@ import { Subscription, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-// Remove these two lines:
-// const connectDB = require('./notesyncs_db');
-// connectDB();
+const connectDB = require('./notesyncs_db');
+ connectDB();
 
 // Define an interface for your Note structure for better type safety
 interface Note {

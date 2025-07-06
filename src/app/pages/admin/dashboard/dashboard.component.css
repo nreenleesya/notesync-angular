@@ -23,24 +23,36 @@ body {
 }
 
 .profile-section {
-    text-align: center;
+    text-align: center; /* This helps center block children that respond to text-align */
     margin-bottom: 30px;
 }
 
+.profile-avatar {
+    display: flex; /* Make it a flex container */
+    flex-direction: column; /* Stack children (image and name) vertically */
+    align-items: center;   /* Center children horizontally within the flex container */
+    justify-content: center; /* Center children vertically (if profile-avatar has a defined height) */
+    margin-bottom: 10px; /* Space below the entire avatar/name block */
+}
+
 .profile-avatar img {
-    width: 80px;
-    height: 80px;
+    width: 80px; /* As per your desired size */
+    height: 80px; /* As per your desired size */
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Keep this to separate image from name */
     border: 3px solid #6a0dad; /* Purple border around avatar */
 }
 
-.profile-section .text-white { /* Targeting the display name */
-    color: #333; /* Change text color to dark for white background */
-    font-weight: 600;
-    margin-top: 5px;
+.profile-avatar span {
+    display: block; /* Ensure it's a block element so text-align works on its content */
+    text-align: center; /* Center the text within the span itself */
+    white-space: normal; /* Allow text to wrap if it's too long */
+    color: #333; /* Explicitly set text color to dark grey */
+    font-weight: 600; /* Explicitly set font weight to semibold */
+    margin-top: 5px; /* Adjust as needed */
 }
+
 
 nav ul {
     list-style: none;
@@ -127,21 +139,28 @@ nav li {
 
     .profile-section {
         margin-bottom: 0;
-        display: flex;
-        align-items: center;
+        display: flex; /* Make it flex to align content horizontally in row mode */
+        align-items: center; /* Center items vertically in row mode */
+        justify-content: center; /* Center items horizontally if there's extra space */
     }
 
     .profile-avatar {
-        margin-right: 10px;
+        margin-right: 10px; /* Space between avatar/name block and other sidebar items */
+        margin-bottom: 0; /* Remove vertical margin from profile-avatar on small screens */
+        flex-direction: row; /* Make avatar and name inline on smaller screens */
     }
 
     .profile-avatar img {
         width: 50px;
         height: 50px;
+        margin-bottom: 0; /* Remove margin below image when inline */
+        margin-right: 10px; /* Space between image and name when inline */
     }
 
-    .profile-section .text-white {
+    .profile-avatar span {
         font-size: 0.9em;
+        text-align: left; /* Text alignment for inline name on smaller screens */
+        white-space: nowrap; /* Prevent wrapping on small screen sidebar if desired */
     }
 
     nav {
