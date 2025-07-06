@@ -1,12 +1,19 @@
-// dashboard.component.ts
+// src/app/pages/pages/dashboard/dashboard.ts
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Required for @if, async pipe
 import { Observable, Subscription } from 'rxjs';
-import { User } from 'firebase/auth'; // Import User type from Firebase Auth
 
-// Firebase imports (ensure these are correctly imported from your Firebase setup)
-import { initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken, signOut } from 'firebase/auth';
+// Corrected Firebase Auth imports:
+// User type comes from 'firebase/auth'
+import { User } from 'firebase/auth';
+// Auth functions come from '@angular/fire/auth' when using AngularFire
+import {
+  Auth, // The Auth service itself, which you get via inject(Auth) or getAuth()
+  onAuthStateChanged,
+  signInAnonymously,
+  signInWithCustomToken,
+  signOut
+} from '@angular/fire/auth';
 
 // Define the shape of the global variables provided by the environment
 declare const __firebase_config: string;
@@ -17,12 +24,12 @@ declare const __app_id: string;
   selector: 'app-dashboard', // How you'd use it: <app-dashboard></app-dashboard>
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './dashboard.html',
+  templateUrl: './dashboard.html', // Assuming this is the correct path to your HTML
   styleUrls: ['./dashboard.css']
 })
 export class UserDashboardComponent implements OnInit, OnDestroy {
   user: User | null = null; // Direct property for user data
-  private auth: any; // Firebase Auth instance
+  private auth: Auth | undefined; // Firebase Auth instance, typed correctly
   private authStateSubscription?: Subscription; // Add subscription property
 
   constructor() { }
@@ -44,20 +51,19 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
       const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
       const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id'; // Using __app_id
 
+      // Initialize Firebase app and get Auth instance
       const app = initializeApp(firebaseConfig);
       this.auth = getAuth(app); // Assign to component property
 
       // Subscribe to auth state changes
       this.authStateSubscription = new Observable<User | null>(observer => {
-        const unsubscribe = onAuthStateChanged(this.auth, async (currentUser) => {
+        // Correctly type the 'currentUser' parameter
+        const unsubscribe = onAuthStateChanged(this.auth as Auth, async (currentUser: User | null) => {
           if (currentUser) {
             this.user = currentUser;
             observer.next(currentUser);
             console.log("Dashboard: User is signed in:", currentUser.uid);
-            interface User {
-              displayName: string;
-              photoURL: string;
-            }
+            // Removed the incorrect 'interface User' declaration from here
           } else {
             this.user = null;
             observer.next(null);
@@ -65,12 +71,12 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
             // Attempt to sign in with custom token if available, otherwise anonymously
             if (initialAuthToken) {
               try {
-                await signInWithCustomToken(this.auth, initialAuthToken);
+                await signInWithCustomToken(this.auth as Auth, initialAuthToken);
                 console.log("Dashboard: Signed in with custom token.");
               } catch (error) {
                 console.error("Dashboard: Error signing in with custom token:", error);
                 try {
-                  await signInAnonymously(this.auth);
+                  await signInAnonymously(this.auth as Auth);
                   console.log("Dashboard: Signed in anonymously.");
                 } catch (anonError) {
                   console.error("Dashboard: Error signing in anonymously:", anonError);
@@ -78,7 +84,7 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
               }
             } else {
               try {
-                await signInAnonymously(this.auth);
+                await signInAnonymously(this.auth as Auth);
                 console.log("Dashboard: Signed in anonymously.");
               } catch (anonError) {
                 console.error("Dashboard: Error signing in anonymously:", anonError);
@@ -103,6 +109,9 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
       await signOut(this.auth);
       console.log("Dashboard: User signed out.");
       // Redirect to login or landing page after logout
+      // Using router.navigate is generally preferred in Angular for SPA navigation
+      // You'll need to inject Router if you use this: private router = inject(Router);
+      // For now, keeping window.location.href as per your original code
       window.location.href = '/login.html'; // Assuming login.html is your login page
     } catch (error: any) {
       console.error("Dashboard: Sign Out Error:", error);
