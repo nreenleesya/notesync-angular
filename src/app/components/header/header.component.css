@@ -1,4 +1,3 @@
-
 header{
     height: 10px;
 }
@@ -8,10 +7,12 @@ header{
     justify-content: space-between;
     align-items: center;
     padding: 15px 5%;
-    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+    /* Changed background-color */
+    background-color: rgba(230, 220, 245, 0.9); /* A very light, transparent lavender/periwinkle */
     backdrop-filter: blur(5px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 0 0 15px 15px; /* Rounded bottom corners */
+    /* Changed border-bottom color slightly */
+    border-bottom: 1px solid rgba(190, 180, 200, 0.5); /* A slightly darker, transparent border */
+    border-radius: 0 0 16px 16px; /* Rounded bottom corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 2; /* Ensure navbar is above the overlay */
 }
@@ -33,6 +34,10 @@ header{
     padding: 5px 10px;
     border-radius: 5px;
     transition: background-color 0.3s ease, color 0.3s ease;
+
+    display: flex; /* Make the link a flex container */
+    align-items: center; /* Vertically align items in the center */
+    gap: 5px; /* Add some space between the icon and text */
 }
 
 .navbar nav ul li a:hover {

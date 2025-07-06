@@ -4,7 +4,7 @@
   max-width: 400px;
   margin: 80px auto;
   padding: 30px 40px;
-  background-color: #ffffff;
+  background-color: #d4ace0;
   border-radius: 12px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -25,21 +25,21 @@
 .signup-form input {
   padding: 12px 14px;
   font-size: 16px;
-  border: 1px solid #cccccc;
+  border: 1px solid #a39d9d;
   border-radius: 6px;
   transition: border-color 0.3s ease;
 }
 
 .signup-form input:focus {
-  border-color: #007bff;
+  border-color: #8011c5;
   outline: none;
 }
 
 .signup-form button {
   padding: 12px;
   font-size: 16px;
-  color: white;
-  background-color: #007bff;
+  color: rgb(206, 201, 201);
+  background-color: #8011c5;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -47,7 +47,7 @@
 }
 
 .signup-form button:hover {
-  background-color: #0056b3;
+  background-color: #8011c5;
 }
 
 .error {

@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; // Keep for other Angular routes if needed
 import { Auth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
 
 @Component({
@@ -12,19 +12,27 @@ import { Auth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider }
   imports: [CommonModule, FormsModule],
 })
 export class LoginPageComponent {
-  private router = inject(Router);
+  private router = inject(Router); // Still useful if you have other Angular routes
   private auth = inject(Auth);
 
   email = '';
   password = '';
   errorMessage: string | null = null;
+  isLoading = false;
+
+  // Define the base URL for your Next.js application
+  // IMPORTANT: Replace with your actual Next.js app URL
+  // During development: 'http://localhost:3000' or 'http://localhost:3001', etc.
+  // In production: 'https://your-nextjs-app.com'
+  private nextJsAppBaseUrl = 'http://localhost:3000'; // <--- !!! CHANGE THIS !!!
 
   async googleSignIn(): Promise<void> {
     this.errorMessage = null;
+    this.isLoading = true;
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(this.auth, provider);
-      console.log('Google Sign-In successful!');
+      // Let the auth guard handle the navigation
       this.router.navigate(['dashboard']);
     } catch (error: any) {
       console.error('Error during Google sign-in:', error);
@@ -33,6 +41,8 @@ export class LoginPageComponent {
       } else {
         this.errorMessage = 'Google Sign-In failed. Please try again.';
       }
+    } finally {
+      this.isLoading = false;
     }
   }
 
@@ -42,9 +52,11 @@ export class LoginPageComponent {
       this.errorMessage = 'Please enter both email and password.';
       return;
     }
+
+    this.isLoading = true;
     try {
       await signInWithEmailAndPassword(this.auth, this.email, this.password);
-      console.log('Email/Password Sign-In successful!');
+      // Let the auth guard handle the navigation
       this.router.navigate(['dashboard']);
     } catch (error: any) {
       console.error('Email/Password Sign-In failed:', error);
@@ -62,6 +74,8 @@ export class LoginPageComponent {
         default:
           this.errorMessage = 'Login failed. Please check your credentials and try again.';
       }
+    } finally {
+      this.isLoading = false;
     }
   }
 }
