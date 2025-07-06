@@ -1,230 +1,160 @@
 /* dashboard.component.css */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #f0f2f5; /* Light grey background for the overall page */
+}
+
 .dashboard-container {
     display: flex;
     min-height: 100vh;
-    background-color: #e0e0ff; /* Light purple background for the whole page */
-    font-family: 'Inter', sans-serif;
-    color: #333;
+    background-color: #f0f2f5; /* Match body background */
 }
 
 .sidebar {
-    width: 280px; /* Fixed width for sidebar */
-    background-color: #f0f0ff; /* Slightly lighter purple for sidebar */
+    width: 250px; /* Fixed width for the sidebar */
+    background-color: #fff; /* White background for the sidebar */
     padding: 20px;
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.05); /* Subtle shadow on the right */
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    justify-content: space-between; /* Pushes logout button to bottom */
 }
 
 .profile-section {
     text-align: center;
-    width: 100%;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #d0d0ed; /* Separator line */
-}
-
-.profile-avatar {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin: 0 auto 15px auto;
-    border: 3px solid #6A5ACD; /* Slate Blue border */
-    box-shadow: 0 0 0 5px rgba(106, 90, 205, 0.2); /* Outer glow */
+    margin-bottom: 30px;
 }
 
 .profile-avatar img {
-    width: 100%;
-    height: 100%;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
     object-fit: cover;
+    margin-bottom: 10px;
+    border: 3px solid #6a0dad; /* Purple border around avatar */
 }
 
-.user-name {
-    font-size: 1.4em;
-    font-weight: 700;
-    margin-bottom: 5px;
-    color: #333;
-}
-
-.user-id {
-    font-size: 0.9em;
-    color: #666;
-    margin-bottom: 20px;
-}
-
-.dashboard-btn {
-    background-color: #6A5ACD; /* Slate Blue */
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 1em;
+.profile-section .text-white { /* Targeting the display name */
+    color: #333; /* Change text color to dark for white background */
     font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
 }
 
-.dashboard-btn.active,
-.dashboard-btn:hover {
-    background-color: #483D8B; /* Darker Slate Blue */
-    transform: translateY(-2px);
-}
-
-.sidebar-nav {
-    width: 100%;
-    flex-grow: 1; /* Allows navigation to take available space */
-}
-
-.sidebar-nav ul {
+nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
+nav li {
+    margin-bottom: 10px;
+}
+
 .nav-item {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 12px 20px;
-    margin-bottom: 10px;
+    padding: 12px 15px;
+    border-radius: 8px; /* Rounded corners for nav items */
+    color: #555; /* Default text color */
     text-decoration: none;
-    color: #555;
-    font-size: 1.1em;
     font-weight: 500;
-    border-radius: 10px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .nav-item:hover {
-    background-color: #d0d0ed; /* Lighter purple on hover */
-    color: #333;
+    background-color: #f0f2f5; /* Light hover background */
+    color: #6a0dad; /* Purple text on hover */
 }
 
-.nav-icon {
-    width: 24px;
-    height: 24px;
-    color: #6A5ACD; /* Icon color */
+.nav-item .nav-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    color: #888; /* Default icon color */
+}
+
+/* Active routerLink style */
+.nav-item.active {
+    background-color: #6a0dad; /* Purple background for active item */
+    color: #fff; /* White text for active item */
+    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.2); /* Subtle shadow for active item */
+}
+
+.nav-item.active .nav-icon {
+    color: #fff; /* White icon for active item */
 }
 
 .logout-btn {
-    background-color: #FF4500; /* Orange Red */
-    color: white;
+    width: 100%;
+    padding: 12px;
+    background-color: #ff8c00; /* Orange color */
+    color: #fff;
     border: none;
-    padding: 12px 30px;
-    border-radius: 25px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
     cursor: pointer;
-    font-size: 1.1em;
-    font-weight: 700;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    margin-top: auto; /* Pushes button to the bottom */
-    width: 80%; /* Make it slightly narrower than 100% */
+    transition: background-color 0.2s ease;
+    margin-top: 30px; /* Space from nav items */
 }
 
 .logout-btn:hover {
-    background-color: #CD3700; /* Darker Orange Red */
-    transform: translateY(-3px);
+    background-color: #e67e00; /* Darker orange on hover */
 }
 
 .main-content {
-    flex-grow: 1;
-    background-color: #d0d0ed; /* Main content background color */
-    padding: 30px;
-    border-radius: 15px;
-    margin: 20px; /* Margin around the main content area */
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.05); /* Inner shadow for depth */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-grow: 1; /* Takes remaining space */
+    padding: 20px;
+    background-color: #f0f2f5; /* Main content background */
 }
 
-.content-placeholder {
-    text-align: center;
-    color: #777;
-    font-size: 1.5em;
-}
-
-/* Responsive Design */
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .dashboard-container {
         flex-direction: column;
     }
 
     .sidebar {
-        width: 25%;
+        width: 100%;
         padding: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        border-right: none;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        gap: 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        flex-direction: row; /* Make sidebar horizontal on small screens */
+        justify-content: space-around;
+        align-items: center;
     }
 
     .profile-section {
-        padding-bottom: 15px;
-    }
-
-    .sidebar-nav ul {
+        margin-bottom: 0;
         display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
+        align-items: center;
     }
 
-    .nav-item {
-        padding: 8px 15px;
-        font-size: 1em;
-        flex-direction: column; /* Stack icon and text */
-        gap: 5px;
+    .profile-avatar {
+        margin-right: 10px;
     }
 
-    .nav-icon {
-        width: 20px;
-        height: 20px;
+    .profile-avatar img {
+        width: 50px;
+        height: 50px;
+    }
+
+    .profile-section .text-white {
+        font-size: 0.9em;
+    }
+
+    nav {
+        display: none; /* Hide full nav on small screens, consider a hamburger menu */
     }
 
     .logout-btn {
         width: auto;
-        margin-top: 20px;
-        padding: 10px 20px;
-        font-size: 1em;
+        padding: 8px 15px;
+        margin-top: 0;
     }
 
     .main-content {
-        margin: 15px;
-        padding: 20px;
-    }
-}
-
-@media (max-width: 480px) {
-    .profile-avatar {
-        width: 80px;
-        height: 80px;
-    }
-
-    .user-name {
-        font-size: 1.2em;
-    }
-
-    .user-id {
-        font-size: 0.8em;
-    }
-
-    .dashboard-btn {
-        padding: 8px 20px;
-        font-size: 0.9em;
-    }
-
-    .nav-item {
-        padding: 6px 10px;
-        font-size: 0.9em;
-    }
-
-    .logout-btn {
-        padding: 8px 15px;
-        font-size: 0.9em;
+        padding: 15px;
     }
 }
