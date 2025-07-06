@@ -1,16 +1,12 @@
 /* General Body Styles */
 body {
     margin: 0;
-    font-family: 'Inter', sans-serif;
-    color: #333;
+    font-family: 'Outfit', sans-serif; /* Changed font to Outfit */
+    color: #4b3e5b; /* Darker, softer purple-grey text color */
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #f5f5f5; /* Light grey background */
-}
-
-.note-item:not(:last-child) {
-    border-bottom: 2px dashed #e0e0e0; /* Lighter dashed line */
+    background-color: #f8f5fb; /* Very light purple-grey background */
 }
 
 section {
@@ -19,470 +15,259 @@ section {
     padding: 0 20px;
 }
 
-section h2 {
-    font-size: 2em;
+.section-title {
+    font-size: 2.2em; /* Slightly larger title */
     font-weight: 700;
-    color: #333;
-    margin-bottom: 30px;
+    color: #6a4a8c; /* Deeper purple for titles */
+    margin-bottom: 40px; /* More space below title */
     text-align: center;
+    position: relative;
+    padding-bottom: 10px;
 }
 
-/* --- Header Styles --- */
-.note-listing, .upload-form {
-    margin-bottom: 30px;
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #8a65b5; /* Accent purple underline */
+    border-radius: 2px;
 }
 
-.notes-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-.note-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
-.note-card h3 {
-    color: #0056b3;
-    margin-top: 0;
-    margin-bottom: 10px;
-}
-
-.note-card p {
-    font-size: 0.9em;
-    line-height: 1.5;
-    margin-bottom: 5px;
-}
-
-.note-card .price {
-    font-weight: bold;
-    color: #28a745;
-    font-size: 1.1em;
-    margin-top: 10px;
-}
-
-.note-card button {
-    background-color: #007bff;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin-top: 10px;
-}
-
-.note-card button:hover {
-    background-color: #0056b3;
-}
-/* --- Upload Form Styles --- */
-
-/* --- Best Deals Section Styles --- */
-.best-deals-section {
-    background-color: #f5f5f5;
-    padding-top: 20px;
-}
-
-.best-deals-section h2 {
-    text-align: left;
-    margin-left: 20px;
-    margin-bottom: 25px;
-    font-size: 1.8em;
-    color: #333;
-}
-
-.deals-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    gap: 20px;
-}
-
-.deal-card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.deal-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
-}
-
-.deal-header {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 10px;
-}
-
-.deal-route {
-    font-size: 1.1em;
-    font-weight: 600;
-    color: #333;
-    flex-basis: 70%; /* Take up more space */
-    margin-bottom: 5px;
-}
-
-.deal-route .arrow {
-    color: #007bff; /* Blue arrow */
-    font-weight: 700;
-    margin: 0 5px;
-}
-
-.deal-price-label {
-    font-size: 0.85em;
-    color: #777;
-    text-align: right;
-    flex-basis: 28%; /* Align to right */
-}
-
-.deal-price {
-    font-size: 1.5em;
-    font-weight: 700;
-    color: #ef5350; /* Red price */
-    text-align: right;
-    flex-basis: 28%;
-    margin-top: -5px; /* Pull up closer to label */
-}
-
-.deal-price-per-pax {
-    font-size: 0.8em;
-    color: #777;
-    text-align: right;
-    flex-basis: 28%;
-    margin-top: -5px;
-}
-
-.deal-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-}
-
-.deal-details p {
-    font-size: 0.9em;
-    color: #555;
-    margin: 0;
-}
-
-.airline-info {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9em;
-    color: #555;
-}
-
-.airline-logo {
-    width: 20px;
-    height: 20px;
-    border-radius: 3px;
-    object-fit: contain;
-}
-
-.select-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1em;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    margin-top: 20px;
-    align-self: flex-end; /* Align to the right bottom */
-    box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
-}
-
-.select-button:hover {
-    background-color: #0056b3;
-    transform: translateY(-1px);
-}
-
-
-.notes-grid, .promo-grid {
-    display: grid;
-    gap: 20px;
-}
-
-.notes-grid {
-    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-}
-
-.promo-grid {
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-}
-
-.notes-item, .promo-item {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.notes-item:hover, .promo-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-.notes-item img, .promo-item img {
-    width: 100%;
-    height: 180px; /* Fixed height for images */
-    object-fit: cover;
-    display: block;
-}
-
-.notes-item h3, .promo-item h3 {
-    font-size: 1.3em;
-    margin: 15px 15px 5px 15px;
-    color: #333;
-}
-
-.destination-item p, .promo-item p {
-    font-size: 0.95em;
-    color: #666;
-    margin: 0 15px 15px 15px;
-}
-
+/* Notesyncs Information Grid */
 .info-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust minmax for card size */
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px; /* Increased gap */
 }
 
 .info-card {
     background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-    padding: 20px;
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
+    padding: 25px; /* Increased padding */
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align content to the left */
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    align-items: center; /* Center align content */
+    text-align: center; /* Center align text */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e9e0f0; /* Subtle light purple border */
 }
 
 .info-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
+    transform: translateY(-8px); /* More pronounced lift effect */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
 }
 
 .card-icon-wrapper {
-    background-color: #ffebee; /* Light red background for icon */
-    border-radius: 50%; /* Circular background */
-    width: 40px;
-    height: 40px;
+    background: linear-gradient(45deg, #a0a3d9, #8477ba); /* Gradient background for icon with soft purples/blues */
+    border-radius: 50%;
+    width: 60px; /* Larger icon wrapper */
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 15px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for icon wrapper */
 }
 
 .card-icon-wrapper i.material-icons {
-    font-size: 1.8em; /* Large icon size */
-    color: #ef5350; /* Red icon color */
+    font-size: 2.5em; /* Larger icon size */
+    color: #ffffff; /* White icon color */
 }
 
 .card-title {
-    font-size: 1em;
-    color: #777;
+    font-size: 1.1em;
+    color: #928a9b; /* Muted purple-grey for title */
     margin-bottom: 10px;
     font-weight: 500;
 }
 
 .card-link {
-    font-size: 1.1em;
-    font-weight: 600;
-    color: #007bff; /* Blue for links */
+    font-size: 1.3em; /* Larger link text */
+    font-weight: 700; /* Bolder link text */
+    color: #8a65b5; /* Primary accent purple */
     text-decoration: none;
-    margin-bottom: 5px; /* Space between link and value if present */
+    margin-bottom: 8px; /* Space between link and value */
     transition: color 0.3s ease;
 }
 
 .card-link:hover {
-    color: #0056b3;
+    color: #725298; /* Darker purple on hover */
     text-decoration: underline;
 }
 
 .card-value {
-    font-size: 1.1em;
+    font-size: 1.3em; /* Larger value text */
+    font-weight: 700;
+    color: #4b3e5b; /* Darker text for values */
+}
+
+.card-value-small {
+    font-size: 1em; /* Smaller value for combined text */
     font-weight: 600;
-    color: #333; /* Darker text for values */
+    color: #7a6e8b; /* Muted purple-grey for small value */
+    margin-top: 5px; /* Space between link and value */
 }
 
-/* Footer Styles */
-.main-footer {
-    background-color: #333;
-    color: white;
-    padding: 40px 0;
-    margin-top: 50px;
+/* Latest Promotions Section */
+.promotions {
+    background-color: #fbfaff; /* Slightly different very light purple background for distinction */
+    padding: 60px 20px; /* More padding */
+    margin-top: 60px; /* More space from previous section */
+    border-radius: 12px;
 }
 
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+.promo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted minmax for promo cards */
+    gap: 30px; /* Increased gap */
+}
+
+.promo-item {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 30px;
+    flex-direction: column;
 }
 
-.footer-section {
-    flex: 1;
-    min-width: 180px;
+.promo-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
 }
 
-.footer-section h3 {
-    font-size: 1.2em;
-    margin-bottom: 15px;
-    color: #007bff;
+.promo-image-wrapper {
+    width: 100%;
+    height: 200px; /* Fixed height for images */
+    overflow: hidden;
+    position: relative;
 }
 
-.footer-section p {
-    font-size: 0.9em;
-    line-height: 1.5;
-    color: #bbb;
+.promo-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
 }
 
-.footer-section ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+.promo-item:hover .promo-image-wrapper img {
+    transform: scale(1.05); /* Slight zoom on hover */
 }
 
-.footer-section ul li {
-    margin-bottom: 8px;
+.promo-content {
+    padding: 20px 25px; /* Increased padding */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows content to take available space */
 }
 
-.footer-section ul li a {
+.promo-content h3 {
+    font-size: 1.6em; /* Larger heading */
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #6a4a8c; /* Purple heading */
+    font-weight: 600;
+}
+
+.promo-content p {
+    font-size: 1em;
+    color: #928a9b; /* Muted purple-grey for paragraph */
+    margin-bottom: 20px; /* More space below paragraph */
+    line-height: 1.6;
+    flex-grow: 1; /* Allows paragraph to take available space */
+}
+
+.promo-button {
+    display: inline-block;
+    background-color: #8a65b5; /* Primary accent purple */
+    color: white;
+    padding: 12px 25px; /* Larger button padding */
+    border-radius: 8px; /* More rounded button */
     text-decoration: none;
-    color: #bbb;
-    font-size: 0.9em;
-    transition: color 0.3s ease;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-start; /* Align button to the left */
+    box-shadow: 0 4px 10px rgba(138, 101, 181, 0.2); /* Soft shadow for button */
 }
 
-.footer-section ul li a:hover {
-    color: #007bff;
+.promo-button:hover {
+    background-color: #725298; /* Darker purple on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(138, 101, 181, 0.3);
 }
 
-/* Responsive Design */
-@media (max-width: 992px) {
-    .header-content, .hero-content, section, .footer-content {
-        padding: 0 15px;
-    }
 
-    .hero-content h1 {
-        font-size: 2.2em;
-    }
-
-    .search-card {
-        padding: 15px;
-    }
-
-    .flight-search-form .form-row {
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    .tab-button {
-        padding: 8px 15px;
-        font-size: 1em;
-    }
-
-    .search-button {
-        font-size: 1.1em;
-        padding: 10px 15px;
-    }
-
-    .destination-grid, .promo-grid {
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-}
-
+/* Responsive Design Adjustments */
 @media (max-width: 768px) {
-    .main-header {
-        padding: 10px 0;
-    }
-
-    .header-content {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .header-nav ul {
-        gap: 15px;
-    }
-
-    .hero-section {
-        height: auto;
-        padding: 40px 0;
-    }
-
-    .hero-content h1 {
+    .section-title {
         font-size: 1.8em;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
     }
 
-    .search-card {
-        margin-top: 20px;
-    }
-
-    .footer-content {
-        flex-direction: column;
-        text-align: center;
+    .info-grid, .promo-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
         gap: 20px;
     }
 
-    .footer-section {
-        min-width: unset;
-        width: 100%;
+    .info-card, .promo-item {
+        padding: 20px;
+    }
+
+    .promo-image-wrapper {
+        height: 180px;
+    }
+
+    .promo-content h3 {
+        font-size: 1.4em;
+    }
+
+    .promo-content p {
+        font-size: 0.9em;
     }
 }
 
 @media (max-width: 480px) {
-    .logo a {
+    section {
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+
+    .section-title {
+        font-size: 1.6em;
+        margin-bottom: 25px;
+    }
+
+    .info-card {
+        padding: 15px;
+    }
+
+    .card-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+    }
+
+    .card-icon-wrapper i.material-icons {
+        font-size: 2em;
+    }
+
+    .card-link, .card-value {
+        font-size: 1.1em;
+    }
+
+    .promo-content h3 {
         font-size: 1.2em;
     }
 
-    .header-nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .tab-button {
+    .promo-button {
+        padding: 10px 20px;
         font-size: 0.9em;
-        padding: 6px 10px;
-    }
-
-    .flight-search-form input {
-        font-size: 0.9em;
-    }
-
-    .search-button {
-        font-size: 1em;
-        padding: 8px 15px;
-    }
-
-    section h2 {
-        font-size: 1.6em;
-    }
-
-    .destination-item img, .promo-item img {
-        height: 150px;
     }
 }

@@ -1,20 +1,37 @@
-header{
-    height: 10px;
-}
 /* Navbar Styles */
 .navbar {
     display: flex;
+    justify-content: center; /* Center the wrapper horizontally */
+    align-items: center;
+    padding: 12px 0; /* Remove horizontal padding here, it'll be on the wrapper */
+    background-color: #fcfaff; /* Very light, soft purple for background */
+    /* backdrop-filter: blur(5px); */
+    border-bottom: 1px solid #e9e0f0; /* Subtle light purple border */
+    border-radius: 0 0 16px 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
+    z-index: 2;
+    position: sticky;
+    top: 0;
+    width: 100%; /* The navbar itself still takes full width for background/shadow */
+}
+
+/* New: Wrapper inside the navbar to control its content width */
+.header-content-wrapper {
+    max-width: 1200px; /* Match landing page sections max-width */
+    width: 100%; /* Ensure it takes full width up to max-width */
+    display: flex; /* Keep flex properties for internal alignment */
     justify-content: space-between;
     align-items: center;
-    padding: 15px 5%;
-    /* Changed background-color */
-    background-color: rgba(230, 220, 245, 0.9); /* A very light, transparent lavender/periwinkle */
-    backdrop-filter: blur(5px);
-    /* Changed border-bottom color slightly */
-    border-bottom: 1px solid rgba(190, 180, 200, 0.5); /* A slightly darker, transparent border */
-    border-radius: 0 0 16px 16px; /* Rounded bottom corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 2; /* Ensure navbar is above the overlay */
+    padding: 0 20px; /* Apply horizontal padding here, matching section padding */
+    box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+.logo h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.6em;
+    font-weight: 700;
+    color: #6a4a8c;
+    margin: 0;
 }
 
 .navbar nav ul {
@@ -28,37 +45,94 @@ header{
 
 .navbar nav ul li a {
     text-decoration: none;
-    color: #333;
-    font-weight: 600;
-    font-size: 1.1em;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #7a6e8b;
+    font-weight: 500;
+    font-size: 1em;
+    padding: 6px 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
 
-    display: flex; /* Make the link a flex container */
-    align-items: center; /* Vertically align items in the center */
-    gap: 5px; /* Add some space between the icon and text */
+.navbar nav ul li a .material-icons {
+    font-size: 1.2em;
+    color: #8a65b5;
+    transition: color 0.3s ease;
 }
 
 .navbar nav ul li a:hover {
-    background-color: rgba(90, 18, 160, 0.1); /* Light hover effect */
-    color: #5a12a0;
+    background-color: rgba(138, 101, 181, 0.1);
+    color: #6a4a8c;
+    transform: translateY(-2px);
 }
 
-.sign-up-btn {
-    background-color: #8A2BE2; /* Blue Violet */
+.navbar nav ul li a:hover .material-icons {
+    color: #725298;
+}
+
+.sign-up-btn { /* Keeping these styles for completeness */
+    background-color: #8a65b5;
     color: white;
     border: none;
     padding: 10px 20px;
-    border-radius: 20px;
+    border-radius: 25px;
     cursor: pointer;
-    font-size: 1.1em;
+    font-size: 1.05em;
     font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(138, 101, 181, 0.2);
 }
 
 .sign-up-btn:hover {
-    background-color: #6a0dad; /* Darker shade on hover */
-    transform: translateY(-2px);
+    background-color: #725298;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(138, 101, 181, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 10px 0; /* Only vertical padding */
+    }
+    .header-content-wrapper {
+        flex-direction: column; /* Stack logo and nav on smaller screens */
+        gap: 10px; /* Space between stacked items */
+        padding: 0 15px; /* Adjust padding for smaller screens */
+    }
+
+    .navbar nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .logo h1 {
+        font-size: 1.5em;
+    }
+
+    .navbar nav ul li a {
+        font-size: 0.9em;
+        padding: 5px 8px;
+    }
+
+    .navbar nav ul li a .material-icons {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar {
+        padding: 8px 0;
+    }
+    .header-content-wrapper {
+        padding: 0 10px; /* Further adjust padding for very small screens */
+    }
+    .logo h1 {
+        font-size: 1.3em;
+    }
+    .navbar nav ul {
+        gap: 8px;
+    }
 }
