@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router'; // Keep for other Angular routes if needed
+import { Router } from '@angular/router';
 import { Auth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
 
 @Component({
@@ -12,7 +12,7 @@ import { Auth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider }
   imports: [CommonModule, FormsModule],
 })
 export class LoginPageComponent {
-  private router = inject(Router); // Still useful if you have other Angular routes
+  private router = inject(Router);
   private auth = inject(Auth);
 
   email = '';
@@ -20,10 +20,6 @@ export class LoginPageComponent {
   errorMessage: string | null = null;
   isLoading = false;
 
-  // Define the base URL for your Next.js application
-  // IMPORTANT: Replace with your actual Next.js app URL
-  // During development: 'http://localhost:3000' or 'http://localhost:3001', etc.
-  // In production: 'https://your-nextjs-app.com'
   private nextJsAppBaseUrl = 'http://localhost:3000'; // <--- !!! CHANGE THIS !!!
 
   async googleSignIn(): Promise<void> {
@@ -32,8 +28,10 @@ export class LoginPageComponent {
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(this.auth, provider);
-      // Let the auth guard handle the navigation
-      this.router.navigate(['dashboard']);
+      // For Google Sign-In, we'll generally navigate to userdashboard
+      // You might want to add a check here if specific Google accounts
+      // should go to 'dashboard' (e.g., based on email domain)
+      this.router.navigate(['userdashboard']);
     } catch (error: any) {
       console.error('Error during Google sign-in:', error);
       if (error.code === 'auth/popup-closed-by-user') {
@@ -56,8 +54,16 @@ export class LoginPageComponent {
     this.isLoading = true;
     try {
       await signInWithEmailAndPassword(this.auth, this.email, this.password);
-      // Let the auth guard handle the navigation
-      this.router.navigate(['dashboard']);
+
+      // --- MODIFICATION START ---
+      // Check for the specific password
+      if (this.password === 'notesyncs123') {
+        this.router.navigate(['dashboard']); // Navigate to dashboard
+      } else {
+        this.router.navigate(['userdashboard']); // Navigate to userdashboard for all other passwords
+      }
+      // --- MODIFICATION END ---
+
     } catch (error: any) {
       console.error('Email/Password Sign-In failed:', error);
       switch (error.code) {

@@ -10,6 +10,7 @@ import { DashboardComponent } from './pages/admin/dashboard/dashboard.component'
 import { SignupPageComponent } from './pages/pages/signup/signup.component';
 import { SalesGraphComponent } from './pages/admin/salesgraph/salesgraph.component';
 import { UserDashboardComponent } from './pages/pages/dashboard/dashboard';
+import { AdminComponent } from './pages/admin/admin profile/admin.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
@@ -50,4 +51,12 @@ export const routes: Routes = [
     path: 'salesgraph', // This path represents the root URL (e.g., http://localhost:4200/)
     component: SalesGraphComponent // When the path is empty, load the NOTESALEComponent
   },
+  {
+    path: 'userdashboard',
+    component: UserDashboardComponent,
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+  }
 ];

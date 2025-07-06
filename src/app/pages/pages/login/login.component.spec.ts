@@ -1,22 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router'; // Import Router
 
-import { LoginPageComponent } from './login.component';
-import { Router } from '@angular/router';
+@Component({
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
+})
+export class LoginComponent {
 
-describe('LoginPageComponent', () => {
-  let component: LoginPageComponent;
-  let fixture: ComponentFixture<LoginPageComponent>;
+  constructor(private router: Router) { } // Inject Router
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [LoginPageComponent]
-    });
-    fixture = TestBed.createComponent(LoginPageComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+  navigateToUserDashboard() {
+    this.router.navigate(['/userdashboard']); // Now 'this.router' is defined
+  }
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  navigateToDashboard() {
+    this.router.navigate(['/dashboard']); // Now 'this.router' is defined
+  }
+}
