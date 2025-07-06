@@ -8,9 +8,6 @@ import { Subscription, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-const connectDB = require('./notesyncs_db');
- connectDB();
-
 // Define an interface for your Note structure for better type safety
 interface Note {
   _id?: string; // Firestore doc.id (though in Firestore it's just 'id')
