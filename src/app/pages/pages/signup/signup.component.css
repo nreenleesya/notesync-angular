@@ -1,16 +1,46 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router'; // Import Router
+/* src/app/pages/pages/signup/signup.component.css */
 
-@Component({
-  selector: 'app-signup',
-  templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
-})
-export class SignupComponent {
+/* This file should ONLY contain CSS rules like these. */
+/* You will need to add your actual styling here. */
 
-  constructor(private router: Router) { } // Inject Router
+.signup-form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    margin: 50px auto;
+}
 
-  navigateToLogin() {
-    this.router.navigate(['/login']); // Now 'this.router' is defined
-  }
+.signup-form h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.signup-form input {
+    width: calc(100% - 20px); /* Adjust for padding */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.signup-form button {
+    background-color: #007bff; /* Example color */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.signup-form button:hover {
+    background-color: #0056b3;
+}
+
+.error {
+    color: red;
+    margin-top: 10px;
 }
