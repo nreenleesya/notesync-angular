@@ -18,13 +18,15 @@ export class LoginPageComponent {
   email = '';
   password = '';
   errorMessage: string | null = null;
+  isLoading = false;
 
   async googleSignIn(): Promise<void> {
     this.errorMessage = null;
+    this.isLoading = true;
     try {
       const provider = new GoogleAuthProvider();
       await signInWithPopup(this.auth, provider);
-      console.log('Google Sign-In successful!');
+      // Let the auth guard handle the navigation
       this.router.navigate(['dashboard']);
     } catch (error: any) {
       console.error('Error during Google sign-in:', error);
@@ -33,6 +35,8 @@ export class LoginPageComponent {
       } else {
         this.errorMessage = 'Google Sign-In failed. Please try again.';
       }
+    } finally {
+      this.isLoading = false;
     }
   }
 
@@ -42,9 +46,11 @@ export class LoginPageComponent {
       this.errorMessage = 'Please enter both email and password.';
       return;
     }
+
+    this.isLoading = true;
     try {
       await signInWithEmailAndPassword(this.auth, this.email, this.password);
-      console.log('Email/Password Sign-In successful!');
+      // Let the auth guard handle the navigation
       this.router.navigate(['dashboard']);
     } catch (error: any) {
       console.error('Email/Password Sign-In failed:', error);
@@ -62,6 +68,8 @@ export class LoginPageComponent {
         default:
           this.errorMessage = 'Login failed. Please check your credentials and try again.';
       }
+    } finally {
+      this.isLoading = false;
     }
   }
 }

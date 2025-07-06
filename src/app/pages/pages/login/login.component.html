@@ -4,42 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOTESYNCS - Sell Your Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="login.component.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- for header button icon -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
-
-<div class="container">
-    <div class="login-card">
-        <div class="left-panel">
-            <div class="logo">
-                <span class="material-symbols-outlined">
-                    edit_note
-                </span>
+<body>
+    <div class="container">
+        <div class="login-card">
+            <div class="left-panel">
+                <div class="logo">
+                    <span class="material-symbols-outlined">
+                        edit_note
+                    </span>
+                </div>
+                <h1>Notesyncs</h1>
+                <p>Share your notes with the world</p>
             </div>
-            <h1>Notesyncs</h1>
-            <p>Share your notes with the world</p>
-        </div>
-        <div class="right-panel">
-            <form (ngSubmit)="login()">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" placeholder="you@example.com" [(ngModel)]="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="••••••••" [(ngModel)]="password" name="password" required>
-                    <a href="#" class="forgot-password">Forgot password?</a>
-                </div>
-                <button type="submit" class="btn-sign-in">Sign in</button>
-            </form>
-            <div class="divider">Or continue with</div>
-            <button class="btn-google-sign-in" (click)="googleSignIn()" type="button">
-                <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google logo">
-                Sign in with Google
-            </button>
-            <p class="signup-text">Don't have an account? <a href="signup" class="sign-up-link">Sign up</a></p>
+            <div class="right-panel">
+                <form (ngSubmit)="login()">
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="you@example.com" [(ngModel)]="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="••••••••" [(ngModel)]="password" name="password" required>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+                    <button type="submit" class="btn-sign-in">Sign in</button>
+                </form>
+                <div class="divider">Or continue with</div>
+                <button class="btn-google-sign-in" (click)="googleSignIn()" type="button">
+                    <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google logo">
+                    Sign in with Google
+                </button>
+                <p class="signup-text">Don't have an account? <a href="signup" class="sign-up-link">Sign up</a></p>
+            </div>
         </div>
     </div>
-</div>
+</body>
+</html>

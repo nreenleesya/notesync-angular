@@ -11,7 +11,7 @@ header{
     background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
     backdrop-filter: blur(5px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 0 0 15px 15px; /* Rounded bottom corners */
+    border-radius: 0 0 16px 16px; /* Rounded bottom corners */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     z-index: 2; /* Ensure navbar is above the overlay */
 }

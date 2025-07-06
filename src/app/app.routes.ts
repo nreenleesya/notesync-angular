@@ -11,30 +11,44 @@ import { SignupPageComponent } from './pages/pages/signup/signup.component';
 import { SalesGraphComponent } from './pages/admin/salesgraph/salesgraph.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToHome = () => redirectLoggedInTo(['login']);
+const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
 
 export const routes: Routes = [
   {
-    path: 'landing', // This path represents the root URL (e.g., http://localhost:4200/)
-    component: LandingPageComponent // When the path is empty, load the NOTESALEComponent
+    path: '',
+    redirectTo: 'landing',
+    pathMatch: 'full'
   },
   {
-    path: 'dashboard', // This path represents the root URL (e.g., http://localhost:4200/)
-    component: DashboardComponent // When the path is empty, load the NOTESALEComponent
+    path: 'landing',
+    component: LandingPageComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
   {
     path: 'login',
     component: LoginPageComponent,
     canActivate: [AuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome },
+    data: { authGuardPipe: redirectLoggedInToDashboard },
   },
   {
-    path: 'signup', // This path represents the root URL (e.g., http://localhost:4200/)
-    component: SignupPageComponent, // When the path is empty, load the NOTESALEComponent
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
+    path: 'signup',
+    component: SignupPageComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectLoggedInToDashboard },
   },
   {
-    path: 'salesgraph', // This path represents the root URL (e.g., http://localhost:4200/)
-    component: SalesGraphComponent // When the path is empty, load the NOTESALEComponent
+    path: 'salesgraph',
+    component: SalesGraphComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin }
   },
+  {
+    path: '**',
+    redirectTo: 'landing'
+  }
 ];
