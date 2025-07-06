@@ -2,7 +2,7 @@
 /* Hero Section */
 .hero-section {
     position: relative;
-    height: 450px; /* Adjust height as needed */
+    height: 450px; 
     background-image:  rgba(254, 254, 254, 0.4); /* Placeholder background image */
     background-size: cover;
     background-position: center;
@@ -66,12 +66,12 @@
 }
 
 .tab-button.active {
-    color: #007bff;
-    border-bottom: 2px solid #007bff;
+    color: #b17fc3;
+    border-bottom: 2px solid #b17fc3;
 }
 
 .tab-button:hover:not(.active) {
-    color: #0056b3;
+    color: #821da6;
 }
 
 .tab-button i.material-icons {
@@ -123,7 +123,7 @@
 .search-button {
     width: 100%;
     padding: 12px 20px;
-    background-color: #007bff;
+    background-color: #6e49cc;
     color: white;
     border: none;
     border-radius: 8px;
@@ -135,6 +135,6 @@
 }
 
 .search-button:hover {
-    background-color: #0056b3;
+    background-color: #a428d5;
     transform: translateY(-1px);
 }
