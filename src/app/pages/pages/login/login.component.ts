@@ -20,7 +20,7 @@ export class LoginPageComponent {
   errorMessage: string | null = null;
   isLoading = false;
 
-  private nextJsAppBaseUrl = 'http://localhost:3000'; // <--- !!! CHANGE THIS !!!
+  private nextJsAppBaseUrl = 'http://localhost:4200'; // <--- !!! CHANGE THIS !!!
 
   async googleSignIn(): Promise<void> {
     this.errorMessage = null;
