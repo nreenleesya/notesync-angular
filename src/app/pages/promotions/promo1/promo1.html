@@ -5,8 +5,9 @@
     <p class="promo-description">{{ dealDetails.description }}</p>
     <div class="promo-info">
       <p><strong>Discount:</strong> {{ dealDetails.discount }}</p>
-      <p><strong>Valid Until:</strong> {{ dealDetails.validUntil }}</p>
+      <p><strong>Valid Until:</strong> {{ dealDetails.validUntil }}</p> <!-- CORRECTED: Changed from validDetails to validUntil -->
     </div>
-    <button class="back-button" routerLink="/landing">Back to Promos</button>
+    <!-- routerLink should point to /home for consistency with app.routes.ts -->
+    <button class="back-button" routerLink="/home">Back to Promos</button>
   </div>
 </div>

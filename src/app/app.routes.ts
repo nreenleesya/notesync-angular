@@ -12,6 +12,8 @@ import { SalesGraphComponent } from './pages/admin/salesgraph/salesgraph.compone
 import { UserDashboardComponent } from './pages/pages/dashboard/dashboard'; // Assuming this is for a general user dashboard
 import { AdminComponent } from './pages/admin/admin profile/admin.component'; // This seems to be your Profile component for admin
 import { NotesUploadedComponent } from './pages/admin/notes uploaded/notes-uploaded.component';
+import { Promo1Component } from './pages/promotions/promo1/promo1';   
+import { Promo2Component } from './pages/promotions/promo2/promo2'; // Assuming these are for promotional pages
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
@@ -41,6 +43,8 @@ export const routes: Routes = [
       { path: 'notes-uploaded', component: NotesUploadedComponent },
       { path: 'shop-management', component: UserDashboardComponent }, // Placeholder - replace with actual Shop Management Component
       { path: 'sales-graph', component: SalesGraphComponent },
+      { path: 'promo1', component: Promo1Component },
+      { path: 'promo2', component: Promo2Component },
       // { path: 'upload-note', component: UploadNoteComponent }, // If upload-note is also a sub-feature
     ]
   },

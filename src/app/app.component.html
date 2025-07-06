@@ -1,9 +1,15 @@
-<router-outlet></router-outlet>
+<!-- src/app/app.component.html -->
+
+<!-- Your main application header, assuming app-header is your custom header component -->
+<app-header></app-header>
+
+<!-- This is the main content area where routed components will be displayed -->
 <div class="site-layout">
-  <app-header></app-header>
-  <div class="container">
-</div>
+  <!-- The single router-outlet where your Angular components (like HomeComponent, Promo1Component) will be rendered -->
   <router-outlet></router-outlet>
 </div>
+
+<!-- Your global footer -->
 <div class="footer">
   <p>&copy; 2023 Notesync. All rights reserved.</p>
+</div>

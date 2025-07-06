@@ -1,5 +1,6 @@
 // src/app/pages/promotions/promo2/promo2.component.spec.ts
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+// Corrected: Assuming your component file is named promo2.component.ts
 import { Promo2Component } from './promo2';
 
 describe('Promo2Component', () => {

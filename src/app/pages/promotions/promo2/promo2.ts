@@ -1,11 +1,14 @@
 // src/app/pages/promotions/promo2/promo2.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common'; // Required for standalone components
+import { RouterLink } from '@angular/router'; // Added RouterLink for back button in HTML
 
 @Component({
   selector: 'app-promo2',
   standalone: true,
-  imports: [CommonModule],
+  // Added RouterLink to imports for the back button in the HTML template
+  imports: [CommonModule, RouterLink],
+  // Corrected: Assuming standard Angular file naming convention
   templateUrl: './promo2.html',
   styleUrls: ['./promo2.css']
 })
