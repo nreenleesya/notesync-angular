@@ -1,0 +1,119 @@
+/* src/app/pages/promotions/promo1/promo1.component.css */
+.promo-detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 60px); /* Adjust for potential header/footer */
+  background-color: #f0f2f5;
+  padding: 20px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.promo-detail-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+  animation: fadeIn 0.8s ease-out;
+}
+
+.promo-title {
+  font-size: 2.8em;
+  color: #6a0dad; /* Purple */
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.promo-description {
+  font-size: 1.2em;
+  color: #555;
+  margin-bottom: 30px;
+  line-height: 1.6;
+}
+
+.promo-info {
+  background-color: #f8f0ff; /* Light purple background */
+  border-left: 5px solid #6a0dad;
+  padding: 15px 25px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.promo-info p {
+  margin: 8px 0;
+  color: #444;
+  font-size: 1.1em;
+}
+
+.promo-info strong {
+  color: #333;
+}
+
+.back-button {
+  background-color: #ff8c00; /* Orange */
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #e67e00;
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .promo-detail-card {
+    padding: 30px;
+  }
+  .promo-title {
+    font-size: 2.2em;
+  }
+  .promo-description {
+    font-size: 1em;
+  }
+  .promo-info {
+    padding: 12px 20px;
+  }
+  .back-button {
+    padding: 12px 25px;
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .promo-detail-card {
+    padding: 20px;
+    margin: 10px;
+  }
+  .promo-title {
+    font-size: 1.8em;
+  }
+  .promo-description {
+    font-size: 0.9em;
+  }
+  .promo-info {
+    font-size: 0.9em;
+  }
+}

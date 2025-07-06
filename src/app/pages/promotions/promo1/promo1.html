@@ -1,0 +1,12 @@
+<!-- src/app/pages/promotions/promo1/promo1.component.html -->
+<div class="promo-detail-container">
+  <div class="promo-detail-card">
+    <h1 class="promo-title">PROMO 1: {{ dealDetails.title }}</h1>
+    <p class="promo-description">{{ dealDetails.description }}</p>
+    <div class="promo-info">
+      <p><strong>Discount:</strong> {{ dealDetails.discount }}</p>
+      <p><strong>Valid Until:</strong> {{ dealDetails.validUntil }}</p>
+    </div>
+    <button class="back-button" routerLink="/landing">Back to Promos</button>
+  </div>
+</div>

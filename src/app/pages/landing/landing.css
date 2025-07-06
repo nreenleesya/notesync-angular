@@ -1,0 +1,273 @@
+/* General Body Styles */
+body {
+    margin: 0;
+    font-family: 'Outfit', sans-serif; /* Changed font to Outfit */
+    color: #4b3e5b; /* Darker, softer purple-grey text color */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f5fb; /* Very light purple-grey background */
+}
+
+section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    font-size: 2.2em; /* Slightly larger title */
+    font-weight: 700;
+    color: #6a4a8c; /* Deeper purple for titles */
+    margin-bottom: 40px; /* More space below title */
+    text-align: center;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 4px;
+    background-color: #8a65b5; /* Accent purple underline */
+    border-radius: 2px;
+}
+
+/* Notesyncs Information Grid */
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px; /* Increased gap */
+}
+
+.info-card {
+    background-color: #ffffff;
+    border-radius: 12px; /* More rounded corners */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Softer, larger shadow */
+    padding: 25px; /* Increased padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align content */
+    text-align: center; /* Center align text */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e9e0f0; /* Subtle light purple border */
+}
+
+.info-card:hover {
+    transform: translateY(-8px); /* More pronounced lift effect */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* More prominent shadow on hover */
+}
+
+.card-icon-wrapper {
+    background: linear-gradient(45deg, #a0a3d9, #8477ba); /* Gradient background for icon with soft purples/blues */
+    border-radius: 50%;
+    width: 60px; /* Larger icon wrapper */
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for icon wrapper */
+}
+
+.card-icon-wrapper i.material-icons {
+    font-size: 2.5em; /* Larger icon size */
+    color: #ffffff; /* White icon color */
+}
+
+.card-title {
+    font-size: 1.1em;
+    color: #928a9b; /* Muted purple-grey for title */
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.card-link {
+    font-size: 1.3em; /* Larger link text */
+    font-weight: 700; /* Bolder link text */
+    color: #8a65b5; /* Primary accent purple */
+    text-decoration: none;
+    margin-bottom: 8px; /* Space between link and value */
+    transition: color 0.3s ease;
+}
+
+.card-link:hover {
+    color: #725298; /* Darker purple on hover */
+    text-decoration: underline;
+}
+
+.card-value {
+    font-size: 1.3em; /* Larger value text */
+    font-weight: 700;
+    color: #4b3e5b; /* Darker text for values */
+}
+
+.card-value-small {
+    font-size: 1em; /* Smaller value for combined text */
+    font-weight: 600;
+    color: #7a6e8b; /* Muted purple-grey for small value */
+    margin-top: 5px; /* Space between link and value */
+}
+
+/* Latest Promotions Section */
+.promotions {
+    background-color: #fbfaff; /* Slightly different very light purple background for distinction */
+    padding: 60px 20px; /* More padding */
+    margin-top: 60px; /* More space from previous section */
+    border-radius: 12px;
+}
+
+.promo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted minmax for promo cards */
+    gap: 30px; /* Increased gap */
+}
+
+.promo-item {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.promo-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.promo-image-wrapper {
+    width: 100%;
+    height: 200px; /* Fixed height for images */
+    overflow: hidden;
+    position: relative;
+}
+
+.promo-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.promo-item:hover .promo-image-wrapper img {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+.promo-content {
+    padding: 20px 25px; /* Increased padding */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Allows content to take available space */
+}
+
+.promo-content h3 {
+    font-size: 1.6em; /* Larger heading */
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #6a4a8c; /* Purple heading */
+    font-weight: 600;
+}
+
+.promo-content p {
+    font-size: 1em;
+    color: #928a9b; /* Muted purple-grey for paragraph */
+    margin-bottom: 20px; /* More space below paragraph */
+    line-height: 1.6;
+    flex-grow: 1; /* Allows paragraph to take available space */
+}
+
+.promo-button {
+    display: inline-block;
+    background-color: #8a65b5; /* Primary accent purple */
+    color: white;
+    padding: 12px 25px; /* Larger button padding */
+    border-radius: 8px; /* More rounded button */
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: flex-start; /* Align button to the left */
+    box-shadow: 0 4px 10px rgba(138, 101, 181, 0.2); /* Soft shadow for button */
+}
+
+.promo-button:hover {
+    background-color: #725298; /* Darker purple on hover */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(138, 101, 181, 0.3);
+}
+
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 1.8em;
+        margin-bottom: 30px;
+    }
+
+    .info-grid, .promo-grid {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+        gap: 20px;
+    }
+
+    .info-card, .promo-item {
+        padding: 20px;
+    }
+
+    .promo-image-wrapper {
+        height: 180px;
+    }
+
+    .promo-content h3 {
+        font-size: 1.4em;
+    }
+
+    .promo-content p {
+        font-size: 0.9em;
+    }
+}
+
+@media (max-width: 480px) {
+    section {
+        margin: 30px auto;
+        padding: 0 15px;
+    }
+
+    .section-title {
+        font-size: 1.6em;
+        margin-bottom: 25px;
+    }
+
+    .info-card {
+        padding: 15px;
+    }
+
+    .card-icon-wrapper {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+    }
+
+    .card-icon-wrapper i.material-icons {
+        font-size: 2em;
+    }
+
+    .card-link, .card-value {
+        font-size: 1.1em;
+    }
+
+    .promo-content h3 {
+        font-size: 1.2em;
+    }
+
+    .promo-button {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+}
