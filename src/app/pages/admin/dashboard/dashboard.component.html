@@ -1,18 +1,14 @@
-<!-- dashboard.component.html -->
 <div class="dashboard-container">
     <aside class="sidebar">
         <div class="profile-section">
             <div class="profile-avatar">
-                <!-- Placeholder for user avatar -->
                 @if(user$ | async; as user) {
-                <div class="flex flex-wrap items-center content-center auth">
-                    <div class="hidden sm:flex flex-wrap items-center content-center text-white">
-                        <img class="w-10 h-10 rounded-full" [src]="pageService.currentUser?.photoURL"
-                            [alt]="pageService.currentUser?.displayName" />
-                        <span class="text-white text-xl whitespace-nowrap font-light px-4 lg:px-5 py-2 lg:py2.5">
-                            {{pageService.currentUser?.displayName}}
-                        </span>
-                    </div>
+                <div class="hidden sm:flex">
+                    <img class="w-12 h-12 rounded-full" [src]="pageService.currentUser?.photoURL"
+                        [alt]="pageService.currentUser?.displayName" />
+                    <span class="text-black text-lg whitespace-nowrap font-normal px-4 lg:px-5 py-2 lg:py2.5">
+                        {{pageService.currentUser?.displayName}}
+                    </span>
                 </div>
                 }
             </div>
@@ -27,7 +23,6 @@
                         </a>
                     </li>
                     <li>
-                        <!-- Added routerLinkActive for styling the active menu item -->
                         <a href="notes-uploaded" routerLinkActive="active" class="nav-item">
                             <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z"></path>
@@ -37,15 +32,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#"  routerLinkActive="active" class="nav-item">
+                        <a href="#" routerLinkActive="active" class="nav-item">
                             <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 000 2h1v2H5a1 1 0 000 2h1v2a1 1 0 001 1h6a1 1 0 001-1v-2h1a1 1 0 000-2h-1V9h1a1 1 0 000-2h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-4 3a1 1 0 100 2h4a1 1 0 100-2H8z" clip-rule="evenodd"></path>
+                                <path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 000 2h1v2H5a1 1 0 000 2h1v2a1 1 0 001 1h6a1 1 0 001-1v-2h1a1 1 0 000-2h-1V9h1a1 1 0 000-2h-1V6a4 4 0 00-4-4zm2 5V6a2 2 10-4 0v1h4zm-4 3a1 1 0 100 2h4a1 1 0 100-2H8z" clip-rule="evenodd"></path>
                             </svg>
                             Shop Management
                         </a>
                     </li>
                     <li>
-                        <a href="salesgraph"  routerLinkActive="active" class="nav-item">
+                        <a href="salesgraph" routerLinkActive="active" class="nav-item">
                             <svg class="nav-icon" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zm-6 6a3 3 0 11-6 0 3 3 0 016 0zm11-6a3 3 0 11-6 0 3 3 0 016 0zm-6 6a3 3 0 11-6 0 3 3 0 016 0z"></path>
                             </svg>
@@ -54,11 +49,6 @@
                     </li>
                 </ul>
             </nav>
-            <!-- Removed href="/" as it's handled by (click) and router -->
             <button class="logout-btn" (click)="pageService.logout()">LOG OUT</button>
         </div>
     </aside>
-
-    <main class="main-content">
-    </main>
-</div>
