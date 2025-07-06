@@ -1,15 +1,10 @@
-import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { Auth, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from '@angular/fire/auth';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router'; // Import Router
 
 @Component({
-  selector: 'app-login-page',
+  selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+  styleUrls: ['./login.component.css']
 })
 export class LoginPageComponent {
   private router = inject(Router);
@@ -20,7 +15,7 @@ export class LoginPageComponent {
   errorMessage: string | null = null;
   isLoading = false;
 
-  private nextJsAppBaseUrl = 'http://localhost:4200'; // <--- !!! CHANGE THIS !!!
+  private nextJsAppBaseUrl = 'http://localhost:3000'; // <--- !!! CHANGE THIS !!!
 
   async googleSignIn(): Promise<void> {
     this.errorMessage = null;

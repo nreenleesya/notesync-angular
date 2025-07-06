@@ -5,10 +5,14 @@ import {
   Auth,
   authState, // Used for the user$ observable for real-time user state
   signInWithPopup,
-  GoogleAuthProvider,
   signOut,
-  User, // TypeScript type for authenticated user object
+  // Removed GoogleAuthProvider from here
+  // Removed User from here
 } from '@angular/fire/auth';
+import {
+  GoogleAuthProvider, // <-- Corrected: Import GoogleAuthProvider from 'firebase/auth'
+  User,               // <-- Corrected: Import User type from 'firebase/auth'
+} from 'firebase/auth'; // <-- Source for GoogleAuthProvider and User type
 import {
   map,
   switchMap,
