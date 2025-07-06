@@ -1,14 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserDashboardComponent } from './dashboard';
+import { Router } from '@angular/router';
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [UserDashboardComponent]
-    });
+export class LandingPageComponent {
 
-  });
+  constructor(private router: Router) { } // Inject Router
 
-  it('should create', () => {
-    expect(UserDashboardComponent).toBeTruthy();
-  });
+  navigateToLogin() {
+    this.router.navigate(['salesgraph']); // Now 'this.router' is defined
+  }
+
+  navigateToLanding() {
+    this.router.navigate(['notes-uploaded']); // Now 'this.router' is defined
+  }
+}

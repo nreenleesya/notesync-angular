@@ -1,0 +1,16 @@
+/* notes-uploaded.component.css */
+
+/* No significant custom CSS needed here as Tailwind handles most of the styling. */
+/* The table and its cells are styled using Tailwind utility classes directly in the HTML. */
+
+/* If you need to add specific styles that are hard to achieve with Tailwind,
+   you can add them here. For example, if you wanted very specific table border styles: */
+/*
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #e0e0e0;
+}
+*/

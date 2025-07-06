@@ -11,6 +11,7 @@ import { SignupPageComponent } from './pages/pages/signup/signup.component';
 import { SalesGraphComponent } from './pages/admin/salesgraph/salesgraph.component';
 import { UserDashboardComponent } from './pages/pages/dashboard/dashboard';
 import { AdminComponent } from './pages/admin/admin profile/admin.component';
+import { NotesUploadedComponent } from './pages/admin/notes uploaded/notes-uploaded.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
@@ -33,7 +34,11 @@ export const routes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin }
+      //{ path: 'upload-note', component: UploadNoteComponent }, /
+  },
+  { 
+    path: 'notes-uploaded', 
+    component: NotesUploadedComponent 
   },
   {
     path: 'login',
