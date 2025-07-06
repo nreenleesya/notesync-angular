@@ -9,6 +9,7 @@ import { LandingPageComponent } from './pages/pages/landing/landing.component';
 import { DashboardComponent } from './pages/admin/dashboard/dashboard.component';
 import { SignupPageComponent } from './pages/pages/signup/signup.component';
 import { SalesGraphComponent } from './pages/admin/salesgraph/salesgraph.component';
+import { UserDashboardComponent } from './pages/pages/dashboard/dashboard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['login']);
@@ -37,4 +38,10 @@ export const routes: Routes = [
     path: 'salesgraph', // This path represents the root URL (e.g., http://localhost:4200/)
     component: SalesGraphComponent // When the path is empty, load the NOTESALEComponent
   },
+  {
+    path: 'user-dashboard',
+    component: UserDashboardComponent,
+    canActivate: [AuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  }
 ];
