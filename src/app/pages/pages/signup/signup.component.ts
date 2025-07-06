@@ -44,6 +44,13 @@ export class SignupPageComponent {
       await createUserWithEmailAndPassword(this.auth, this.email, this.password);
       console.log('Sign-Up successful!');
       const provider = new GoogleAuthProvider();
+      const User = require('./models/User'); // Your Mongoose model
+
+async function createUser(userData: any) {
+  const newUser = new User(userData);
+  await newUser.save();
+  console.log('User created:', newUser);
+}
       this.router.navigate(['login']);
     } catch (error: any) {
       console.error('Sign-Up failed:', error);
