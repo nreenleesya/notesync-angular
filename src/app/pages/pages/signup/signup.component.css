@@ -31,7 +31,7 @@
 }
 
 .signup-form input:focus {
-  border-color: #007bff;
+  border-color: #8011c5;
   outline: none;
 }
 
@@ -39,7 +39,7 @@
   padding: 12px;
   font-size: 16px;
   color: white;
-  background-color: #007bff;
+  background-color: #8011c5;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -47,7 +47,7 @@
 }
 
 .signup-form button:hover {
-  background-color: #0056b3;
+  background-color: #8011c5;
 }
 
 .error {
