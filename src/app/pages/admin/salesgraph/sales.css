@@ -1,87 +1,124 @@
-
-/* Hero Section */
-.hero-section {
-    position: relative;
-    height: 450px; 
-    background-image:  rgba(254, 254, 254, 0.4); /* Placeholder background image */
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
+/* General Styling */
+body {
+    font-family: 'Outfit', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f7fc;
+    color: #333;
 }
 
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
+/* Sidebar styling would be in your main app's global stylesheet */
+
+/* Main Content Styling for the Sales Graph Component */
+.main-content {
+    padding: 30px;
+    background-color: #f8f7fc;
+    display: flex; /* This ensures header-nav and hero-section stack vertically */
+    flex-direction: column;
+    /* If your parent layout uses flexbox to position main-content next to sidebar,
+       you might also want `flex: 1;` here. */
+}
+
+/* Header Styling (Top right) - This should be *outside* the hero-section in HTML */
+.header-nav {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    margin-bottom: 30px; /* Space between header and hero section */
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Dark overlay for readability */
+    box-sizing: border-box;
+}
+
+.header-nav a {
+    color: #555;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.header-nav a:hover {
+    color: #6a0dad;
+}
+
+.header-nav a i.material-icons {
+    font-size: 1.3em;
+}
+
+/* Hero Section (now contains only the chart generation card) */
+.hero-section {
+    position: relative;
+    padding: 50px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    flex-grow: 1; /* Allows it to take remaining vertical space */
+    overflow: hidden;
+}
+
+/* Decorative background elements */
+.hero-section::before,
+.hero-section::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(224, 176, 255, 0.6) 0%, rgba(106, 13, 173, 0) 70%);
+    opacity: 0.3;
+    z-index: 0;
+}
+
+.hero-section::before {
+    width: 200px;
+    height: 200px;
+    top: -50px;
+    left: -50px;
+}
+
+.hero-section::after {
+    width: 300px;
+    height: 300px;
+    bottom: -100px;
+    right: -100px;
 }
 
 .hero-content {
     position: relative;
     z-index: 1;
     max-width: 900px;
+    margin: 0 auto;
     width: 100%;
     padding: 0 20px;
 }
 
 .hero-content h1 {
-    font-size: 2.8em;
-    margin-bottom: 30px;
+    font-size: 3em;
+    margin-bottom: 25px;
     font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #6a0dad;
+    text-shadow: none;
 }
 
 .search-card {
     background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px;
     text-align: left;
-}
-
-.search-tabs {
-    display: flex;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
-}
-
-.tab-button {
-    background-color: transparent;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1.1em;
-    font-weight: 600;
-    color: #777;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: color 0.3s ease, border-bottom 0.3s ease;
-}
-
-.tab-button.active {
-    color: #b17fc3;
-    border-bottom: 2px solid #b17fc3;
-}
-
-.tab-button:hover:not(.active) {
-    color: #821da6;
-}
-
-.tab-button i.material-icons {
-    font-size: 1.3em;
+    border: 1px solid #eee;
 }
 
 .flight-search-form .form-row {
     display: flex;
     gap: 20px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .flight-search-form .form-group {
@@ -91,50 +128,75 @@
 }
 
 .flight-search-form .form-group.full-width {
-    flex: none; /* Override flex: 1 */
+    flex: none;
     width: 100%;
 }
 
 .flight-search-form label {
-    font-size: 0.9em;
-    color: #777;
-    margin-bottom: 5px;
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 8px;
     font-weight: 500;
 }
 
 .flight-search-form input[type="text"],
 .flight-search-form input[type="date"] {
     width: 100%;
-    padding: 10px 12px;
+    padding: 12px 15px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1em;
     box-sizing: border-box;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fdfdff;
+    color: #333;
 }
 
 .flight-search-form input[type="text"]:focus,
 .flight-search-form input[type="date"]:focus {
-    border-color: #007bff;
+    border-color: #8a2be2;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.2);
 }
 
 .search-button {
     width: 100%;
-    padding: 12px 20px;
-    background-color: #6e49cc;
+    padding: 15px 25px;
+    background-color: #8a2be2;
     color: white;
     border: none;
-    border-radius: 8px;
-    font-size: 1.2em;
+    border-radius: 10px;
+    font-size: 1.3em;
     font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 6px 15px rgba(138, 43, 226, 0.25);
 }
 
 .search-button:hover {
-    background-color: #a428d5;
-    transform: translateY(-1px);
+    background-color: #6a0dad;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(138, 43, 226, 0.35);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 20px;
+    }
+
+    .header-nav {
+        justify-content: center;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.2em;
+    }
+
+    .flight-search-form .form-row {
+        flex-direction: column;
+        gap: 15px;
+    }
 }

@@ -3,41 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOTESYNCS - Sell Your Notes</title>
+    <title>NOTESYNCS - Sales Graph</title>
     <link rel="stylesheet" href="sales.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- for header button icon -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
+<body>
 
-<section class="hero-section">
-            <div class="hero-overlay"></div>
+    <div class="main-content">
+        
+
+        <section class="hero-section">
             <div class="hero-content">
-                <h1>Generate Sell Chart</h1>
+                <h1>Generate Notes Sell Chart</h1>
                 <div class="search-card">
-                    <div class="search-tabs">
-                        <button class="tab-button active">
-                            <i class="material-icons">notes</i> Notes
-                        </button>
-                    </div>
                     <form class="flight-search-form">
                         <div class="form-row">
-                            <div class="form-group">
-                                <label for="origin">Select date to generate sell graph </label>
+                            <div class="form-group full-width">
+                                <label for="date-selection-info">Select date to generate sell graph</label>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="departure-date">Start Date</label>
-                                <input type="date" id="departure-date" value="2025-07-15">
+                                <label for="start-date">Start Date</label>
+                                <input type="date" id="start-date" [value]="startDate" [max]="todayDate" (change)="onStartDateChange($event)">
                             </div>
                             <div class="form-group">
-                                <label for="return-date">End Date</label>
-                                <input type="date" id="return-date" placeholder="Add return date">
+                                <label for="end-date">End Date</label>
+                                <input type="date" id="end-date" placeholder="Add end date" [value]="endDate" [max]="todayDate"  (change)="onEndDateChange($event)">
                             </div>
                         </div>
-                        <button type="submit" class="search-button">Generate Chart</button>
+                        <button type="submit" class="search-button" (click)="generateChart()">Generate Chart</button>
                     </form>
                 </div>
             </div>
         </section>
+    </div>
+
+</body>
+</html>

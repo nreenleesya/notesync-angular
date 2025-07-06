@@ -1,23 +1,58 @@
+<!-- admin.html (Angular Template) -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOTESYNCS - Sell Your Notes</title>
+    <title>NOTESYNCS - Admin Profile</title>
     <link rel="stylesheet" href="admin.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- for header button icon -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- No inline <style> tags for button specific CSS here, it's moved to admin.css -->
 </head>
 <body>
     <main>
         <section class="admin-section">
             <h2>Admin Profile</h2>
-            <div class="admin-details">
-                <p>Name: John Doe</p>
-                <!--<p>Email: john.doe@example.com</p-->
-                <p>Role: Administrator</p>
+
+            <!-- Display Mode -->
+            <div class="admin-details" [hidden]="isEditing">
+                <p>Name: <span>{{ displayName }}</span></p>
+                <p>Email: <span>{{ displayEmail }}</span></p>
+                <p>Role: <span>{{ displayRole }}</span></p>
+                <p>Member Since: <span>{{ displayMemberSince }}</span></p>
+                <p>Last Login: <span>{{ displayLastLogin }}</span></p>
+                <p>Total Notes Uploaded: <span>{{ displayNotesUploaded }}</span></p>
             </div>
+
+            <!-- Edit Mode -->
+            <div class="admin-edit-form" [hidden]="!isEditing">
+                <label for="edit-name">Name:</label>
+                <input type="text" id="edit-name" [(ngModel)]="editName">
+
+                <label for="edit-email">Email:</label>
+                <input type="email" id="edit-email" [(ngModel)]="editEmail">
+
+                <label for="edit-role">Role:</label>
+                <input type="text" id="edit-role" [value]="displayRole" disabled>
+
+                <label for="edit-member-since">Member Since:</label>
+                <input type="text" id="edit-member-since" [value]="displayMemberSince" disabled>
+
+                <label for="edit-last-login">Last Login:</label>
+                <input type="text" id="edit-last-login" [value]="displayLastLogin" disabled>
+
+                <label for="edit-notes-uploaded">Total Notes Uploaded:</label>
+                <input type="text" id="edit-notes-uploaded" [value]="displayNotesUploaded" disabled>
+
+                <button class="save-button" (click)="onSaveChanges()">Save Changes</button>
+                <button class="cancel-button" (click)="onCancelEdit()">Cancel</button>
+            </div>
+
+            <!-- Edit Button (visible only in display mode) -->
+            <button class="edit-button" (click)="onEditProfile()" [hidden]="isEditing">Edit Profile</button>
+
         </section>
     </main>
 </body>
