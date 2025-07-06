@@ -5,15 +5,17 @@ import { Observable, Subscription } from 'rxjs';
 
 // Corrected Firebase Auth imports:
 // User type comes from 'firebase/auth'
-import { User } from 'firebase/auth';
-// Auth functions come from '@angular/fire/auth' when using AngularFire
+import { User } from 'firebase/auth'; // <-- Correct import for User type
+// Firebase app initialization and auth functions from 'firebase/app' and '@angular/fire/auth'
+import { initializeApp } from 'firebase/app'; // <-- CRUCIAL: Import initializeApp
 import {
   Auth, // The Auth service itself, which you get via inject(Auth) or getAuth()
+  getAuth, // <-- CRUCIAL: Import getAuth
   onAuthStateChanged,
   signInAnonymously,
   signInWithCustomToken,
   signOut
-} from '@angular/fire/auth';
+} from '@angular/fire/auth'; // <-- Auth functions from @angular/fire/auth
 
 // Define the shape of the global variables provided by the environment
 declare const __firebase_config: string;
@@ -52,8 +54,8 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
       const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id'; // Using __app_id
 
       // Initialize Firebase app and get Auth instance
-      const app = initializeApp(firebaseConfig);
-      this.auth = getAuth(app); // Assign to component property
+      const app = initializeApp(firebaseConfig); // <-- initializeApp is now imported and used
+      this.auth = getAuth(app); // <-- getAuth is now imported and used
 
       // Subscribe to auth state changes
       this.authStateSubscription = new Observable<User | null>(observer => {
@@ -63,7 +65,6 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
             this.user = currentUser;
             observer.next(currentUser);
             console.log("Dashboard: User is signed in:", currentUser.uid);
-            // Removed the incorrect 'interface User' declaration from here
           } else {
             this.user = null;
             observer.next(null);
@@ -109,9 +110,6 @@ export class UserDashboardComponent implements OnInit, OnDestroy {
       await signOut(this.auth);
       console.log("Dashboard: User signed out.");
       // Redirect to login or landing page after logout
-      // Using router.navigate is generally preferred in Angular for SPA navigation
-      // You'll need to inject Router if you use this: private router = inject(Router);
-      // For now, keeping window.location.href as per your original code
       window.location.href = '/login.html'; // Assuming login.html is your login page
     } catch (error: any) {
       console.error("Dashboard: Sign Out Error:", error);
