@@ -15,6 +15,7 @@ import {
   signInWithCustomToken,
   signOut
 } from '@angular/fire/auth';
+import { initializeApp } from '@angular/fire/app';
 
 // Define the shape of the global variables provided by the environment
 declare const __firebase_config: string;
