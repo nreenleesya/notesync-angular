@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Auth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from '@angular/fire/auth';
 import { Router } from '@angular/router'; // Import Router
 
 @Component({
@@ -15,6 +16,7 @@ export class LoginPageComponent {
   errorMessage: string | null = null;
   isLoading = false;
 
+  //TODO: <--- !!! CHANGE THIS !!!
   private nextJsAppBaseUrl = 'http://localhost:3000'; // <--- !!! CHANGE THIS !!!
 
   async googleSignIn(): Promise<void> {
