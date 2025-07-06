@@ -1,3 +1,5 @@
+// src/app/pages/admin/notes uploaded/notes-uploaded.component.ts
+
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Auth, onAuthStateChanged, User as FirebaseUser } from '@angular/fire/auth';
@@ -6,12 +8,12 @@ import { Subscription, Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
-//const connectDB = require('./notesyncs_db');
- //connectDB();
+const connectDB = require('./notesyncs_db');
+ connectDB();
 
 // Define an interface for your Note structure for better type safety
 interface Note {
-  _id?: string; // Firestore doc.id
+  _id?: string; // Firestore doc.id (though in Firestore it's just 'id')
   title: string;
   subject: string;
   description: string;
@@ -19,8 +21,8 @@ interface Note {
   fileUrl: string;
   tags: string[];
   contributorId: string;
-  uploadedAt: Date; // Firestore Timestamp will be converted to Date
-  updatedAt: Date; // Firestore Timestamp will be converted to Date
+  uploadedAt: Date;
+  updatedAt: Date;
   salesCount: number;
 }
 
@@ -90,13 +92,13 @@ export class NotesUploadedComponent implements OnInit, OnDestroy {
         const updatedAtDate = noteData['updatedAt'] ? noteData['updatedAt'].toDate() : null;
 
         this.notes.push({
-          _id: doc.id,
+          _id: doc.id, // This will correctly map Firestore doc.id to your _id
           title: noteData['title'],
           subject: noteData['subject'],
           description: noteData['description'],
           price: noteData['price'],
           fileUrl: noteData['fileUrl'],
-          tags: noteData['tags'] || [], // Ensure tags is an array
+          tags: noteData['tags'] || [],
           contributorId: noteData['contributorId'],
           uploadedAt: uploadedAtDate,
           updatedAt: updatedAtDate,
@@ -165,7 +167,7 @@ export class NotesUploadedComponent implements OnInit, OnDestroy {
       this.authStateSubscription.unsubscribe();
     }
     if (this.notesSubscription) {
-      this.notesSubscription();
+      this.notesSubscription(); // Unsubscribe the onSnapshot listener
     }
   }
 }
