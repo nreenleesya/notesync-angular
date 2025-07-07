@@ -2,18 +2,18 @@
 
 import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
-import { Auth, onAuthStateChanged, User as FirebaseUser } from '@angular/fire/auth';
-import { Firestore, collection, query, where, onSnapshot, DocumentData, QuerySnapshot, Timestamp } from '@angular/fire/firestore';
-import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage'; // Import Storage related functions
-import { Subscription, Observable, of } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { Auth, user, User as FirebaseUser, onAuthStateChanged } from '@angular/fire/auth';
+// FIX 3: Add addDoc and getDocs to imports
+import { Firestore, collection, query, where, onSnapshot, doc, getDoc, getDocs, Timestamp, updateDoc, deleteDoc, QuerySnapshot, DocumentData, addDoc } from '@angular/fire/firestore';
+import { Storage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from '@angular/fire/storage';
+import { Observable, Subscription, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { PageService } from '../../../services/page.service'; // Assuming this service exists and has addDocToCollection
+import { NgIf, NgFor, DatePipe, DecimalPipe } from '@angular/common';
 
-// Define an interface for your Note structure for better type safety
+// Define your Note interface (make sure uploadedAt and updatedAt are Date | null)
 interface Note {
-  _id?: string; // Firestore doc.id (though in Firestore it's just 'id')
+  _id: string;
   title: string;
   subject: string;
   description: string;
@@ -21,52 +21,48 @@ interface Note {
   fileUrl: string;
   tags: string[];
   contributorId: string;
-  uploadedAt: Date | Timestamp; // Allow both Date (after toDate()) and Timestamp (before toDate())
-  updatedAt: Date | Timestamp;
+  uploadedAt: Date | null;
+  updatedAt: Date | null;
   salesCount: number;
 }
 
 @Component({
   selector: 'app-notes-uploaded',
   standalone: true,
-  imports: [CommonModule, FormsModule], // Add FormsModule here
+  imports: [CommonModule, FormsModule, NgIf, NgFor, DatePipe, DecimalPipe],
   templateUrl: './notes-uploaded.component.html',
   styleUrls: ['./notes-uploaded.component.css']
 })
 export class NotesUploadedComponent implements OnInit, OnDestroy {
-  private auth = inject(Auth);
-  private firestore = inject(Firestore);
-  private router = inject(Router);
-  private pageService = inject(PageService); // Inject PageService
-  private storage = inject(Storage); // Inject Firebase Storage
-
-  // --- State for displaying notes ---
-  notes: Note[] = [];
-  isLoadingList: boolean = true; // Renamed to avoid conflict
-  errorMessageList: string | null = null; // Renamed to avoid conflict
-
-  private authStateSubscription: Subscription | undefined;
-  private notesSubscription: (() => void | undefined) | undefined; // onSnapshot returns an unsubscribe function
+  private auth: Auth = inject(Auth);
+  private firestore: Firestore = inject(Firestore);
+  private storage: Storage = inject(Storage);
 
   currentUserUid: string | null = null;
+  authStateSubscription: Subscription | null = null;
+  notesSubscription: (() => void) | null = null;
 
-  // --- State for uploading notes ---
-  showUploadForm: boolean = false; // Controls visibility of the upload form
+  // For Note List Display
+  notes: Note[] = [];
+  isLoadingList: boolean = true;
+  errorMessageList: string | null = null;
+
+  // For Note Upload Form
+  showUploadForm: boolean = false;
   noteTitle: string = '';
   noteSubject: string = '';
   noteDescription: string = '';
   notePrice: number = 0;
-  noteTags: string = ''; // Comma-separated string for input
+  noteTags: string = '';
   selectedFile: File | null = null;
-
-  isLoadingUpload: boolean = false; // Controls loading state for upload
   uploadProgress: number = 0;
-  uploadErrorMessage: string | null = null; // Error specific to upload
-  uploadSuccessMessage: string | null = null; // Success specific to upload
+  isLoadingUpload: boolean = false;
+  uploadSuccessMessage: string | null = null;
+  uploadErrorMessage: string | null = null;
 
 
   ngOnInit(): void {
-    // This subscription handles fetching notes when user auth state changes
+    console.log('NotesUploadedComponent: Initializing...');
     this.authStateSubscription = new Observable<FirebaseUser | null>(observer => {
       onAuthStateChanged(this.auth, user => {
         observer.next(user);
@@ -75,38 +71,45 @@ export class NotesUploadedComponent implements OnInit, OnDestroy {
       switchMap(user => {
         if (user && user.uid) {
           this.currentUserUid = user.uid;
-          // When user logs in, fetch their notes
+          console.log('NotesUploadedComponent: User logged in. UID:', this.currentUserUid);
           this.fetchNotes(user.uid);
-          return of([]); // Return an observable to satisfy switchMap, actual notes are in onSnapshot
+          return of([]);
         } else {
-          // User is not logged in
           this.errorMessageList = 'You must be logged in to view your uploaded notes.';
           this.isLoadingList = false;
           this.notes = [];
           this.currentUserUid = null;
-          // Optionally redirect if not logged in
-          // this.router.navigate(['/login']);
+          console.log('NotesUploadedComponent: No user logged in or user logged out.');
           return of([]);
         }
       })
     ).subscribe({
       next: () => {
-        // This 'next' handler is for the outer Observable, actual note data is handled by onSnapshot directly
+        console.log('NotesUploadedComponent: Auth state observable next triggered.');
       },
       error: (err) => {
-        console.error('Error in auth state or notes fetching:', err);
+        console.error('NotesUploadedComponent: Error in auth state or notes fetching pipeline:', err);
         this.errorMessageList = 'An error occurred while loading your notes.';
         this.isLoadingList = false;
       }
     });
   }
 
-  private fetchNotes(contributorId: string): void { // Changed return type to void as onSnapshot handles data
+  ngOnDestroy(): void {
+    if (this.authStateSubscription) {
+      this.authStateSubscription.unsubscribe();
+    }
+    if (this.notesSubscription) {
+      this.notesSubscription();
+    }
+  }
+
+  private fetchNotes(contributorId: string): void {
+    console.log('NotesUploadedComponent: fetchNotes called for contributorId:', contributorId);
     this.isLoadingList = true;
     this.errorMessageList = null;
     this.notes = [];
 
-    // Unsubscribe previous listener if it exists to prevent memory leaks/duplicate listeners
     if (this.notesSubscription) {
       this.notesSubscription();
     }
@@ -118,10 +121,6 @@ export class NotesUploadedComponent implements OnInit, OnDestroy {
       const fetchedNotes: Note[] = [];
       snapshot.forEach(doc => {
         const noteData = doc.data();
-        // Convert Firestore Timestamp to JavaScript Date objects if they exist
-        const uploadedAtDate = noteData['uploadedAt'] ? (noteData['uploadedAt'] as Timestamp).toDate() : null;
-        const updatedAtDate = noteData['updatedAt'] ? (noteData['updatedAt'] as Timestamp).toDate() : null;
-
         fetchedNotes.push({
           _id: doc.id,
           title: noteData['title'],
@@ -131,228 +130,171 @@ export class NotesUploadedComponent implements OnInit, OnDestroy {
           fileUrl: noteData['fileUrl'],
           tags: noteData['tags'] || [],
           contributorId: noteData['contributorId'],
-          uploadedAt: uploadedAtDate,
-          updatedAt: updatedAtDate,
+          uploadedAt: noteData['uploadedAt'] ? (noteData['uploadedAt'] as Timestamp).toDate() : null,
+          updatedAt: noteData['updatedAt'] ? (noteData['updatedAt'] as Timestamp).toDate() : null,
           salesCount: noteData['salesCount'] || 0
         } as Note);
       });
       this.notes = fetchedNotes;
       this.isLoadingList = false;
+      console.log('NotesUploadedComponent: Firestore snapshot received. Notes count:', this.notes.length);
       if (this.notes.length === 0) {
         this.errorMessageList = 'You have not uploaded any notes yet.';
+        console.log('NotesUploadedComponent: No notes found for this user.');
       } else {
-        this.errorMessageList = null; // Clear if notes are found
+        this.errorMessageList = null;
+        console.log('NotesUploadedComponent: Notes loaded successfully:', this.notes);
       }
     }, (error) => {
-      console.error('Error fetching notes:', error);
+      console.error('NotesUploadedComponent: Error fetching notes from Firestore:', error);
       this.errorMessageList = 'Failed to load notes. Please try again.';
       this.isLoadingList = false;
     });
   }
 
-  // --- Upload-specific methods ---
+  convertTimestampToDate(value: Date | Timestamp | null): Date | null {
+    if (value instanceof Timestamp) {
+      return value.toDate();
+    }
+    return value;
+  }
 
-  toggleUploadForm(): void {
+  addNewNote(): void {
     this.showUploadForm = !this.showUploadForm;
+    // Reset form fields when opening
     if (this.showUploadForm) {
-      this.resetUploadForm(); // Clear form when showing it
-      this.uploadSuccessMessage = null; // Clear success message if showing form again
+      this.noteTitle = '';
+      this.noteSubject = '';
+      this.noteDescription = '';
+      this.notePrice = 0;
+      this.noteTags = '';
+      this.selectedFile = null;
+      this.uploadProgress = 0;
+      this.isLoadingUpload = false;
+      this.uploadSuccessMessage = null;
+      this.uploadErrorMessage = null;
     }
   }
 
-  onFileSelected(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.presentationml.presentation'];
-      if (!allowedTypes.includes(file.type)) {
-        this.uploadErrorMessage = 'Only PDF and PPTX files are allowed.';
-        this.selectedFile = null;
-        return;
-      }
+  onCancelUpload(): void {
+    this.showUploadForm = false;
+    // Clear any messages or progress
+    this.uploadSuccessMessage = null;
+    this.uploadErrorMessage = null;
+    this.uploadProgress = 0;
+    this.isLoadingUpload = false;
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file && (file.type === 'application/pdf' || file.type === 'application/vnd.openxmlformats-officedocument.presentationml.presentation')) {
       this.selectedFile = file;
-      this.uploadErrorMessage = null; // Clear any previous errors
+      this.uploadErrorMessage = null;
     } else {
       this.selectedFile = null;
+      this.uploadErrorMessage = 'Please select a valid PDF or PPTX file.';
     }
   }
 
   async onSubmitUpload(): Promise<void> {
+    if (!this.selectedFile || !this.currentUserUid) {
+      this.uploadErrorMessage = 'Please select a file and ensure you are logged in.';
+      return;
+    }
+
     this.isLoadingUpload = true;
-    this.uploadErrorMessage = null;
     this.uploadSuccessMessage = null;
-    this.uploadProgress = 0;
-
-    if (!this.currentUserUid) {
-      this.uploadErrorMessage = 'You must be logged in to upload a note.';
-      this.isLoadingUpload = false;
-      return;
-    }
-
-    if (!this.selectedFile || !this.noteTitle || !this.noteSubject || !this.noteDescription || this.notePrice < 0) {
-      this.uploadErrorMessage = 'Please fill in all required fields and select a file.';
-      this.isLoadingUpload = false;
-      return;
-    }
+    this.uploadErrorMessage = null;
 
     try {
-      // 1. Upload file to Firebase Storage
-      const fileExtension = this.selectedFile.name.split('.').pop();
-      const filePath = `notes/${this.currentUserUid}/${this.noteTitle.replace(/\s+/g, '_')}_${Date.now()}.${fileExtension}`;
-      const storageRef = ref(this.storage, filePath);
+      const storageRef = ref(this.storage, `notes/${this.currentUserUid}/${this.selectedFile.name}`);
       const uploadTask = uploadBytesResumable(storageRef, this.selectedFile);
 
       uploadTask.on('state_changed',
         (snapshot) => {
           this.uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log('Upload is ' + this.uploadProgress + '% done');
         },
         (error) => {
-          console.error('File upload failed:', error);
-          this.uploadErrorMessage = `File upload failed: ${error.message}`;
+          console.error('Upload failed', error);
+          this.uploadErrorMessage = 'File upload failed: ' + error.message;
           this.isLoadingUpload = false;
+          this.uploadProgress = 0;
         },
         async () => {
-          const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
-          console.log('File available at', downloadURL);
+          const fileUrl = await getDownloadURL(uploadTask.snapshot.ref);
+          const notesCollection = collection(this.firestore, 'notes');
 
-          // 2. Save note metadata to Firestore
-          const tagsArray = this.noteTags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0);
+          // FIX 1: Change getDoc to getDocs for query
+          const q = query(notesCollection, where('contributorId', '==', this.currentUserUid), where('fileUrl', '==', fileUrl));
+          const querySnapshot = await getDocs(q); // Corrected to getDocs
 
-          const newNoteData = {
+          let noteExists = false;
+          if (!querySnapshot.empty) { // Check if any documents were returned
+            noteExists = true;
+          }
+
+          if (noteExists) {
+            this.uploadErrorMessage = 'A note with this file already exists for your account.';
+            this.isLoadingUpload = false;
+            this.uploadProgress = 0;
+            return;
+          }
+
+          const newNote = {
             title: this.noteTitle,
             subject: this.noteSubject,
             description: this.noteDescription,
             price: this.notePrice,
-            fileUrl: downloadURL,
-            tags: tagsArray,
+            fileUrl: fileUrl,
+            tags: this.noteTags.split(',').map(tag => tag.trim()).filter(tag => tag.length > 0),
             contributorId: this.currentUserUid,
-            uploadedAt: Timestamp.now(), // Use Firestore server timestamp
+            uploadedAt: Timestamp.now(),
             updatedAt: Timestamp.now(),
             salesCount: 0
           };
 
-          await this.pageService.addDocToCollection('notes', newNoteData);
+          // FIX 3: addDoc is now imported and correctly used
+          await addDoc(notesCollection, newNote);
 
-          this.uploadSuccessMessage = 'Note uploaded and saved successfully!';
+          this.uploadSuccessMessage = 'Note uploaded successfully!';
           this.isLoadingUpload = false;
           this.uploadProgress = 0;
-          this.resetUploadForm(); // Clear form after success
-          // No navigation needed, as this component now handles both
-          // The onSnapshot listener will automatically update the list.
-          setTimeout(() => {
-            this.showUploadForm = false; // Hide form after success
-            this.uploadSuccessMessage = null; // Clear success message after hiding form
-          }, 2000);
+          this.showUploadForm = false; // Hide form after successful upload
+          // FIX 4: Use non-null assertion as currentUserUid is checked above
+          this.fetchNotes(this.currentUserUid!);
         }
       );
-
     } catch (error: any) {
-      console.error('Error during note upload/save:', error);
-      this.uploadErrorMessage = `Error: ${error.message}`;
+      console.error('Error uploading note:', error);
+      this.uploadErrorMessage = 'Error uploading note: ' + error.message;
       this.isLoadingUpload = false;
+      this.uploadProgress = 0;
     }
   }
 
-  resetUploadForm(): void {
-    this.noteTitle = '';
-    this.noteSubject = '';
-    this.noteDescription = '';
-    this.notePrice = 0;
-    this.noteTags = '';
-    this.selectedFile = null;
-    const fileInput = document.getElementById('file-upload') as HTMLInputElement;
-    if (fileInput) {
-      fileInput.value = ''; // Clear the file input visually
-    }
-  }
 
-  onCancelUpload(): void {
-    this.resetUploadForm();
-    this.uploadErrorMessage = null;
-    this.uploadSuccessMessage = null;
-    this.isLoadingUpload = false;
-    this.uploadProgress = 0;
-    this.showUploadForm = false; // Hide the form
-  }
-
-  // --- Helper functions for display (already existing) ---
+  // Helper to get file icon based on extension
   getFileIcon(fileUrl: string): string {
-    if (!fileUrl) return '📄';
-    const extension = fileUrl.split('.').pop()?.toLowerCase();
-    switch (extension) {
-      case 'pdf': return '📄';
-      case 'jpg': case 'jpeg': case 'png': case 'gif': return '🖼️';
-      case 'mp4': case 'mov': case 'avi': return '🎬';
-      case 'doc': case 'docx': return '📝';
-      case 'xls': case 'xlsx': return '📊';
-      case 'ppt': case 'pptx': return '📊'; // Changed to presentation icon
-      default: return '📄';
+    const fileName = this.getFileName(fileUrl);
+    if (fileName.toLowerCase().endsWith('.pdf')) {
+      return '📄';
+    } else if (fileName.toLowerCase().endsWith('.pptx')) {
+      return '📊';
     }
+    return '📁';
   }
 
   getFileName(fileUrl: string): string {
-    if (!fileUrl) return 'Unknown File';
-
-    try {
-      const url = new URL(fileUrl);
-      let fileNameWithQuery = url.pathname.split('/').pop();
-
-      if (!fileNameWithQuery) {
-        return 'Unknown File';
-      }
-
-      // Remove any query parameters
-      let cleanedFileName = fileNameWithQuery.split('?')[0];
-
-      // Replace '+' with spaces, as this encoding might come from storage paths
-      cleanedFileName = cleanedFileName.replace(/\+/g, ' ');
-
-      // --- Start of fix for URIError ---
-      try {
-        // Attempt to decode URI components. This is where the error occurs.
-        cleanedFileName = decodeURIComponent(cleanedFileName);
-      } catch (e) {
-        console.warn(`URIError: Could not decode "${cleanedFileName}". Returning as is.`, e);
-        // If decodeURIComponent fails, return the string as it was before this step.
-        // This prevents the application from crashing.
-      }
-      // --- End of fix ---
-
-      // Optional: Attempt to remove Firebase Storage's timestamp/UUID suffix
-      // This heuristic checks for a 13-digit timestamp (e.g., 1678901234567)
-      // followed by an underscore and then potentially another part (e.g., uniqueID.pdf)
-      const parts = cleanedFileName.split('_');
-      // Check if the second-to-last part is a 13-digit number (timestamp)
-      if (parts.length >= 2 && /^\d{13}$/.test(parts[parts.length - 2])) {
-        // If it matches the pattern 'name_timestamp_uniqueId.extension'
-        // Remove the last two parts (uniqueId and timestamp)
-        parts.splice(parts.length - 2, 2);
-        return parts.join('_') || cleanedFileName; // Fallback to original if splicing makes it empty
-      }
-
-      return cleanedFileName || 'Unknown File';
-
-    } catch (e) {
-      console.error('Error in getFileName (URL parsing or unexpected issue):', e);
-      // Fallback if the URL constructor itself fails (e.g., if fileUrl is severely malformed)
-      // In this case, just try the simple string manipulation without any URI decoding
-      const simpleSplitName = fileUrl.split('/').pop()?.split('?')[0];
-      return simpleSplitName ? simpleSplitName.replace(/\+/g, ' ') : 'Unknown File';
-    }
-  }
-
-  // No longer navigates, just toggles the form
-  addNewNote(): void {
-    this.toggleUploadForm();
-  }
-
-  ngOnDestroy(): void {
-    if (this.authStateSubscription) {
-      this.authStateSubscription.unsubscribe();
-    }
-    if (this.notesSubscription) {
-      this.notesSubscription(); // Unsubscribe the onSnapshot listener
+    try {
+      const url = new URL(fileUrl);
+      const path = url.pathname;
+      const lastSlashIndex = path.lastIndexOf('/');
+      const fileNameWithQuery = lastSlashIndex !== -1 ? path.substring(lastSlashIndex + 1) : path;
+      const questionMarkIndex = fileNameWithQuery.indexOf('?');
+      return questionMarkIndex !== -1 ? fileNameWithQuery.substring(0, questionMarkIndex) : fileNameWithQuery;
+    } catch (e) {
+      console.error('Error parsing file URL:', e);
+      return fileUrl;
     }
   }
 }
