@@ -64,18 +64,13 @@ type ChatMessage = {
   imageUrl?: string; // Optional: URL of an image attached to the message
 };
 
-/**
- * ChatService is responsible for all core functionalities of the chat application, including:
- * - User authentication (Google Sign-In, user state management)
- * - Sending and loading chat messages (text and images) to/from Firestore
- * - Uploading images to Firebase Storage
- * - Handling Firebase Cloud Messaging (FCM) for notifications
- * - Navigating based on authentication state
- */
 @Injectable({
   providedIn: 'root', // This makes PageService a singleton instance available application-wide
 })
 export class PageService {
+  updateAuthProfile(currentUser: User, arg1: { displayName: string; email: string; }) {
+    throw new Error('Method not implemented.');
+  }
   // Inject Firebase services using Angular's `inject` function for standalone components.
   // This automatically provides the service instances that were configured in `app.config.ts`.
   firestore: Firestore = inject(Firestore);
@@ -392,6 +387,16 @@ export class PageService {
     } catch (error) {
       console.error('Error uploading file to storage:', error);
       return null;
+    }
+  }
+    async addDocToCollection(collectionPath: string, data: DocumentData): Promise<DocumentReference<DocumentData>> {
+    try {
+      const docRef = await addDoc(collection(this.firestore, collectionPath), data);
+      console.log(`Document added to ${collectionPath} with ID:`, docRef.id);
+      return docRef;
+    } catch (error) {
+      console.error(`Error adding document to collection ${collectionPath}:`, error);
+      throw error; // Re-throw for handling in the component
     }
   }
 

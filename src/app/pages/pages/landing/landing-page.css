@@ -113,95 +113,6 @@ section {
     margin-top: 5px; /* Space between link and value */
 }
 
-/* Latest Promotions Section */
-.promotions {
-    background-color: #fbfaff; /* Slightly different very light purple background for distinction */
-    padding: 60px 20px; /* More padding */
-    margin-top: 60px; /* More space from previous section */
-    border-radius: 12px;
-}
-
-.promo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted minmax for promo cards */
-    gap: 30px; /* Increased gap */
-}
-
-.promo-item {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.promo-item:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-}
-
-.promo-image-wrapper {
-    width: 100%;
-    height: 200px; /* Fixed height for images */
-    overflow: hidden;
-    position: relative;
-}
-
-.promo-image-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.promo-item:hover .promo-image-wrapper img {
-    transform: scale(1.05); /* Slight zoom on hover */
-}
-
-.promo-content {
-    padding: 20px 25px; /* Increased padding */
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1; /* Allows content to take available space */
-}
-
-.promo-content h3 {
-    font-size: 1.6em; /* Larger heading */
-    margin-top: 0;
-    margin-bottom: 10px;
-    color: #6a4a8c; /* Purple heading */
-    font-weight: 600;
-}
-
-.promo-content p {
-    font-size: 1em;
-    color: #928a9b; /* Muted purple-grey for paragraph */
-    margin-bottom: 20px; /* More space below paragraph */
-    line-height: 1.6;
-    flex-grow: 1; /* Allows paragraph to take available space */
-}
-
-.promo-button {
-    display: inline-block;
-    background-color: #8a65b5; /* Primary accent purple */
-    color: white;
-    padding: 12px 25px; /* Larger button padding */
-    border-radius: 8px; /* More rounded button */
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    align-self: flex-start; /* Align button to the left */
-    box-shadow: 0 4px 10px rgba(138, 101, 181, 0.2); /* Soft shadow for button */
-}
-
-.promo-button:hover {
-    background-color: #725298; /* Darker purple on hover */
-    transform: translateY(-2px);
-    box-shadow: 0 6px 15px rgba(138, 101, 181, 0.3);
-}
 
 
 /* Responsive Design Adjustments */
@@ -218,18 +129,6 @@ section {
 
     .info-card, .promo-item {
         padding: 20px;
-    }
-
-    .promo-image-wrapper {
-        height: 180px;
-    }
-
-    .promo-content h3 {
-        font-size: 1.4em;
-    }
-
-    .promo-content p {
-        font-size: 0.9em;
     }
 }
 
@@ -260,14 +159,5 @@ section {
 
     .card-link, .card-value {
         font-size: 1.1em;
-    }
-
-    .promo-content h3 {
-        font-size: 1.2em;
-    }
-
-    .promo-button {
-        padding: 10px 20px;
-        font-size: 0.9em;
     }
 }

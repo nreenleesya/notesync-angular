@@ -1,25 +1,36 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners, provideZoneChangeDetection } from '@angular/core';
+// src/app/app.config.ts
+
+import { ApplicationConfig, provideZoneChangeDetection, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
-import {  importProvidersFrom } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http'; // Often needed for Firebase operations
-import { getMessaging, provideMessaging } from '@angular/fire/messaging'; // For Firebase Messaging
 
-import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+// Import necessary Firebase functions and providers
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getStorage, provideStorage } from '@angular/fire/storage';
-import { environment } from '../environments/environment';
-provideFirebaseApp(() => initializeApp(environment.firebase));
+import { getMessaging, provideMessaging } from '@angular/fire/messaging'; // For Firebase Messaging
+
+import { routes } from './app.routes';
+import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import { environment } from '../environments/environment'; // Correct path to environment
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideClientHydration(),
-    provideHttpClient(),
-    provideRouter(routes), provideClientHydration(withEventReplay()), provideFirebaseApp(() => initializeApp({ projectId: "notesync-332b5", appId: "1:467539007887:web:88081bed3623264b1b53fa", storageBucket: "notesync-332b5.firebasestorage.app", apiKey: "AIzaSyCIHgV9su9DZCyrkj4X1Q9_zqwbSbHYEXA", authDomain: "notesync-332b5.firebaseapp.com", messagingSenderId: "467539007887", measurementId: "G-CH0BLR1CNC" })), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideStorage(() => getStorage()), provideMessaging(() => getMessaging())
+    provideRouter(routes),
+    provideClientHydration(withEventReplay()), // Keep this if you're using SSR/Hydration
+    provideHttpClient(), // Provide HttpClient for HTTP requests (Firebase might use it internally)
+    provideBrowserGlobalErrorListeners(), // Keep this if you want global error handling
+
+    // --- CORRECTED FIREBASE INITIALIZATION ---
+    provideFirebaseApp(() => initializeApp(environment.firebaseConfig)), // Use environment.firebaseConfig
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
+    provideMessaging(() => getMessaging()),
+    // --- END CORRECTED FIREBASE INITIALIZATION ---
+
+    // Any other global providers needed
   ]
 };

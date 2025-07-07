@@ -1,16 +1,37 @@
-/* notes-uploaded.component.css */
+/* src/app/pages/dashboard/upload-note/upload-note.component.css */
 
-/* No significant custom CSS needed here as Tailwind handles most of the styling. */
-/* The table and its cells are styled using Tailwind utility classes directly in the HTML. */
-
-/* If you need to add specific styles that are hard to achieve with Tailwind,
-   you can add them here. For example, if you wanted very specific table border styles: */
-/*
-table {
-    border-collapse: collapse;
+/* Basic styling for the container */
+div {
+  font-family: 'Inter', sans-serif;
 }
 
-th, td {
-    border: 1px solid #e0e0e0;
+/* Form input and textarea styles */
+input[type="text"],
+input[type="number"],
+textarea {
+  transition: all 0.2s ease-in-out;
 }
-*/
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  border-color: #9333ea; /* Purple-500 equivalent */
+  box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.2); /* Ring effect */
+}
+
+/* File input custom styling might need more effort, but basic is fine */
+input[type="file"]::file-selector-button {
+  background-color: #ede9fe; /* Purple-100 */
+  color: #7c3aed; /* Purple-600 */
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #d8b4fe; /* Purple-200 */
+}
+
+/* Button styles are mostly handled by Tailwind classes in HTML */
